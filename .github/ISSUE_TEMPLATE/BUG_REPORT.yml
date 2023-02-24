@@ -33,7 +33,7 @@ body:
   - type: textarea
     id: actual_behavior
     attributes:
-      label: Expected Behavior
+      label: Actual Behavior
       description: Tell us what actually happened and how it was different from the expected result. Attach screenshots and/or screenrecordings if helpful.
   - type: dropdown
     id: browsers
