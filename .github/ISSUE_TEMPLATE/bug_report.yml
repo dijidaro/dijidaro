@@ -1,0 +1,67 @@
+name: Bug Report
+description: File a bug report
+title: "[BUG]: "
+labels: ["bug", "triage"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to fill out this bug report to help us improve **dijidaro**. Kindly fill in all fields to the best of your ability.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Please provide a clear and detailed description of the bug you have encountered. Be sure to add as much information about the bug so that anyone picking up the story understands what the issue is. If possible, please also include a screenshot or video of the bug in action.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: List down all the steps you took to reproduce the issue, even if you think those steps are obvious to everyone. The point here is to give as much guidance to reproduce the bug as possible. Remember you should write this as if the person who will see the steps is completely new to **dijidaro**
+      placeholder: |
+        ex.
+        1. Detail step 1
+        2. Detail step 2
+        3. Detail step 3
+        4. Detail step 4
+    validations:
+      required: true
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: Expected Behavior
+      description: Tell us what actually happened and how it was different from the expected result. Attach screenshots and/or screenrecordings if helpful.
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: On which browsers are you seeing the problem?
+      multiple: true
+      options:
+        - Chrome
+        - Safari
+        - Firefox
+        - Microsoft edge
+  - type: input
+    id: url
+    attributes:
+      label: Link to screenshots/screen recordings
+      description: Paste a link to any screenshots or screen recordings for this issue. Use a Google Drive file if your video contains sensitive information.
+  - type: textarea
+    id: other
+    attributes:
+      label: Additional Context
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://dijidaro.co.ke/terms)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+        - required: true
