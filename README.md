@@ -1,4 +1,4 @@
-# digi-daro
+# dijidaro
 
 dijidaro is a free and open source learning and revision reporsitory for students, educators and parents. Students can get free access to the uploaded revision and learning resources originating from different learning institutions countrywide to enable them axe and excel in exams. For educators and parents, they can get access to free teaching materials as well as uploading the learning/revision materials to the students. Read [more](https://www.dijidaro.co.ke/about) about us.
 
