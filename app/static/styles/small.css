@@ -1,0 +1,12 @@
+html {
+    background-color:honeydew;
+}
+
+header, footer {
+    background-color:cadetblue;
+    color: honeydew;
+}
+
+p em {
+    color: hotpink;
+}
