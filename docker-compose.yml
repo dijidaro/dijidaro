@@ -5,6 +5,8 @@ services:
   db:
       image: postgres:latest
       restart: always
+      environment:
+        POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       volumes:
         - daro-data:/var/lib/postgresql/data
       ports:
