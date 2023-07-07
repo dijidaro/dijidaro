@@ -1,20 +1,20 @@
-# import os
-# from config import create_app
-
-# app = create_app()
-
-# if __name__ == "__main__":
-#     port = int(os.environ.get("PORT", 5000))
-#     app.run(host="0.0.0.0", port=port, debug=True)
 import os
-from flask import Flask, render_template
+from config import create_app
 
-app = Flask(__name__)
-
-@app.route("/")
-def index():
-    return render_template("index.html")
+app = create_app()
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
+# import os
+# from flask import Flask, render_template
+
+# app = Flask(__name__)
+
+# @app.route("/")
+# def index():
+#     return render_template("index.html")
+
+# if __name__ == "__main__":
+#     port = int(os.environ.get("PORT", 5000))
+#     app.run(host="0.0.0.0", port=port, debug=True)
