@@ -15,16 +15,15 @@
 html { height: 100%; }
 body { min-height: 100%; }
 
-header {
+header, .container {
   display: flex;
   justify-content: space-between;
   background-color: var(--brand-color);
-  padding: 1rem;
   align-items: center;
 }
 
 nav {
-  background-color:var(--dark-accent);
+  background-color:var(--tertiary);
   display: flex;
   width: 100%;
   height: 100vh;
@@ -32,8 +31,8 @@ nav {
   top: 0;
   left: 0;
   z-index: 1000;
-  transform: translateX(-100%);
-  transition: transform 0.2s ease;
+  transform: translateY(-100%);
+  transition: transform 0.7s ease;
 }
 
 nav:target {
@@ -42,7 +41,7 @@ nav:target {
 
 nav ul {
   list-style-type: none;
-  margin: 0;
+  margin-top: 15px;
   padding: 0;
   display: flex;
   width: 100%;
@@ -51,9 +50,19 @@ nav ul {
 
 nav a {
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
   display: block;
   text-align: center;
-  padding: .85rem;
+  padding: 0 .85rem 1.5rem;
   color: var(--light-shade);
+}
+
+.hamburger i, .close i{
+  color: var(--light-shade);
+  font-size: 2.5rem;
+}
+
+.close i {
+  padding: 0;
 }

@@ -3,7 +3,6 @@
         display: none;
     }
     header {
-        height: 50px;
         align-items: center;
     }
 
@@ -15,13 +14,17 @@
         align-items: center;
     }
     nav ul {
+        margin: 0;
         display: flex;
         flex-flow: row;
     }
+    nav ul li a:hover {
+        background-color: var(--dark-shade);
+    }
     nav a {
         font-size: .895rem;
-        font-weight: 500;
         display: block;
         text-align: center;
+        padding: .85rem;
     }
 }
