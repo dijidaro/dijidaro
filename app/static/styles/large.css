@@ -1,7 +1,10 @@
 @media (min-width: 992px) {
-    .hamburger, .close {
+
+    .hamburger,
+    .close {
         display: none;
     }
+
     header {
         align-items: center;
     }
@@ -13,14 +16,34 @@
         transform: translateX(0);
         align-items: center;
     }
+
     nav ul {
         margin: 0;
         display: flex;
         flex-flow: row;
     }
+
     nav ul li a:hover {
-        background-color: var(--dark-shade);
+        background-color: var(--brand-color2);
     }
+
+
+    nav ul li input[type=search] {
+        background-color: var(--brand-color2);
+        border: none;
+    }
+
+    nav ul li input[type=search]:focus {
+        background-color: var(--brand-color3);
+        color: var(--light-shade);
+    }
+
+    nav ul li input[type=search]::placeholder {
+        color: var(--light-shade);
+        opacity: .6;
+        font-size: .895rem;
+    }
+
     nav a {
         font-size: .895rem;
         display: block;
