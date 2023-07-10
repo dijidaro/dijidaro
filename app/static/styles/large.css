@@ -1,0 +1,27 @@
+@media (min-width: 992px) {
+    .hamburger, .close {
+        display: none;
+    }
+    header {
+        height: 50px;
+        align-items: center;
+    }
+
+    nav {
+        background-color: transparent;
+        height: auto;
+        position: static;
+        transform: translateX(0);
+        align-items: center;
+    }
+    nav ul {
+        display: flex;
+        flex-flow: row;
+    }
+    nav a {
+        font-size: .895rem;
+        font-weight: 500;
+        display: block;
+        text-align: center;
+    }
+}
