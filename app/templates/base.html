@@ -14,34 +14,36 @@
 </head>
 <body>
     <header>
-        <a class="logo" href="#">
-            <img src="../static/images/dijidaro-logo.png" alt="dijidaro logo" height="30">
-        </a>
-        <a class="hamburger" href="#navbar" aria-label="Open navigation panel.">
-            <span class="visually-hidden">Open navigation panel</span>
-            <i class="bi bi-list" aria-hidden="true"></i>
-        </a>
-        <nav id="navbar">
-            <ul>
-                <li><a href="#"><i class="bi bi-binoculars-fill" aria-hidden="true"></i>&nbsp;Explore</a></li>
-                <li><a href="#"><i class="bi bi-cloud-arrow-up-fill" aria-hidden="true"></i>&nbsp;Upload</a></li>
-                <li><a href="#"><i class="bi bi-question-circle-fill" aria-hidden="true"></i>&nbsp;Help Us</a></li>
-                <li><a href="#"><i class="bi bi-info-circle-fill" aria-hidden="true"></i>&nbsp;About</a></li>
-                <li class="d-flex align-items-center justify-content-center">
-                    <form action="" role="search">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="" id="">
-                    </form>
-                </li>
-                <li><a href="#" title="Messages"><i class="bi bi-envelope-fill"></i></a></li>
-                <li><a href="#" title="My Stuffs"><i class="bi bi-folder-fill"></i></a></li>
-                <li><a href="#">Join dijidaro</a></li>
-                <li><a href="#">Login</a></li>
-            </ul>
-            <a href="#" class="close" aria-label="Close navigation panel">
-                <span class="visually-hidden">Close navigation panel</span>
-                <i class="bi bi-x-lg" aria-hidden="true"></i>
+        <div class="container">
+            <a class="logo" href="#">
+                <img src="../static/images/dijidaro-logo.png" alt="dijidaro logo" height="30">
             </a>
-        </nav>
+            <a class="hamburger" href="#navbar" aria-label="Open navigation panel.">
+                <span class="visually-hidden">Open navigation panel</span>
+                <i class="bi bi-list" aria-hidden="true"></i>
+            </a>
+            <nav id="navbar">
+                <ul>
+                    <li><a href="#"><i class="bi bi-binoculars-fill" aria-hidden="true"></i>&nbsp;Explore</a></li>
+                    <li><a href="#"><i class="bi bi-cloud-arrow-up-fill" aria-hidden="true"></i>&nbsp;Upload</a></li>
+                    <li><a href="#"><i class="bi bi-question-circle-fill" aria-hidden="true"></i>&nbsp;Help Us</a></li>
+                    <li><a href="#"><i class="bi bi-info-circle-fill" aria-hidden="true"></i>&nbsp;About</a></li>
+                    <li class="d-flex align-items-center justify-content-center">
+                        <form action="" role="search">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="" id="">
+                        </form>
+                    </li>
+                    <li><a href="#" title="Messages"><i class="bi bi-envelope-fill"></i></a></li>
+                    <li><a href="#" title="My Stuffs"><i class="bi bi-folder-fill"></i></a></li>
+                    <li><a href="#"><i></i> Join dijidaro</a></li>
+                    <li><a href="#"><i></i> Login</a></li>
+                </ul>
+                <a href="#" class="close" aria-label="Close navigation panel">
+                    <span class="visually-hidden">Close navigation panel</span>
+                    <i class="bi bi-x-lg" aria-hidden="true"></i>
+                </a>
+            </nav>
+        </div>
     </header>
     <main>
         {% block body %} {% endblock %}
