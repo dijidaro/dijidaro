@@ -5,10 +5,6 @@
         display: none;
     }
 
-    header {
-        align-items: center;
-    }
-
     nav {
         background-color: transparent;
         height: auto;
@@ -27,7 +23,6 @@
         background-color: var(--brand-color2);
     }
 
-
     nav ul li input[type=search] {
         background-color: var(--brand-color2);
         border: none;
@@ -41,7 +36,8 @@
     nav ul li input[type=search]::placeholder {
         color: var(--light-shade);
         opacity: .6;
-        font-size: .895rem;
+        font-size: .85rem;
+        height: 40px;
     }
 
     nav a {
