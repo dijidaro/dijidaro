@@ -82,3 +82,12 @@ nav a {
   color: var(--light-shade);
   font-size: 2.5rem;
 }
+
+.students { color: crimson;}
+.educators { color: lightseagreen;}
+.parents { color: #f2a807; }
+
+.students, .educators, .parents {
+  font-size: 1.3rem;
+  background-color: #faf9f1;
+}
