@@ -8,7 +8,6 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
-
     import dashboard
     app.register_blueprint(dashboard.bp)
     app.add_url_rule("/", endpoint="home")
