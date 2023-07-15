@@ -1,7 +1,8 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+import app
 
-db = SQLAlchemy()
+db = SQLAlchemy(app)
 
 class Students(db.Model):
     __tablename__ = "students"
@@ -14,3 +15,6 @@ class Students(db.Model):
     gender = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+
+with app.app_context():
+    db.create_all()
