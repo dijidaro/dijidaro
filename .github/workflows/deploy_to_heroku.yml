@@ -16,7 +16,9 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku login -i
-             heroku buildpacks:set heroku/python
+             
+      - name: Set Heroku Buildpacks
+        run: heroku buildpacks:set heroku/python
 
       - name: Set up Docker Compose
         env:
@@ -28,4 +30,3 @@ jobs:
           heroku container:login -i
           heroku container:push web -a dijidaro-app
           heroku container:release web -a dijidaro-app
-          
