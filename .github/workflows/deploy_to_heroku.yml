@@ -12,21 +12,25 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       
-      - name: Login to Heroku
+      - name: Login to Heroku Container Registry
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku login
+        run: heroku container:login
              
-      - name: Set Heroku Buildpacks
-        run: heroku buildpacks:set heroku/python
-
-      - name: Set up Docker Compose
+      - name: Build and Push Docker Images
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          cp $GITHUB_WORKSPACE/.env $GITHUB_WORKSPACE/.github/workflows/heroku_deployment.yml /tmp
-          cd /tmp
-          docker-compose -f docker-compose.yml build
-          heroku container:login
           heroku container:push web -a dijidaro-app
           heroku container:release web -a dijidaro-app
+
+      # - name: Set up Docker Compose
+      #   env:
+      #     HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      #   run: |
+      #     cp $GITHUB_WORKSPACE/.env $GITHUB_WORKSPACE/.github/workflows/heroku_deployment.yml /tmp
+      #     cd /tmp
+      #     docker-compose -f docker-compose.yml build
+      #     heroku container:login
+      #     heroku container:push web -a dijidaro-app
+      #     heroku container:release web -a dijidaro-app
