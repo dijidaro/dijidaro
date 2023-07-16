@@ -15,7 +15,7 @@ jobs:
       - name: Login to Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku login -i
+        run: heroku login
              
       - name: Set Heroku Buildpacks
         run: heroku buildpacks:set heroku/python
@@ -27,6 +27,6 @@ jobs:
           cp $GITHUB_WORKSPACE/.env $GITHUB_WORKSPACE/.github/workflows/heroku_deployment.yml /tmp
           cd /tmp
           docker-compose -f docker-compose.yml build
-          heroku container:login -i
+          heroku container:login
           heroku container:push web -a dijidaro-app
           heroku container:release web -a dijidaro-app
