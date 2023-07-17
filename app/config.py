@@ -4,8 +4,8 @@ from flask_wtf.csrf import CSRFProtect
 
 csrf = CSRFProtect()
 
-# Create and configure app.
 def create_app():
+    # Create and configure app.
     app = Flask(__name__, instance_relative_config=True)
 
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
