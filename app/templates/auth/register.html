@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <h2>Create new account</h2>
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <div class="mb-3">
+            {{ form.firstname.label }}
+            {{ form.firstname }}
+        </div>
+        <div class="mb-3">
+            {{ form.lastname.label }}
+            {{ form.lastname }}
+        </div>
+        <div class="mb-3">
+            {{ form.gender.label }}
+            {{ form.gender }}
+        </div>
+        <div class="mb-3">
+            {{ form.birthdate.label }}
+            {{ form.birthdate }}
+        </div>
+        <div class="mb-3">
+            {{ form.username.label }}
+            {{ form.username }}
+        </div>
+        <div class="mb-3">
+            {{ form.email.label }}
+            {{ form.email }}
+        </div>
+        <div class="mb-3">
+            {{ form.password.label }}
+            {{ form.password }}
+        </div>
+        <div class="mb-3">
+            {{ form.password2.label }}
+            {{ form.password2 }}
+        </div>
+        <div class="mb-3">
+            {{ form.submit }}
+        </div>
+
+    </form>
+</div>
+{% endblock %}

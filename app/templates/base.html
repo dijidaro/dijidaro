@@ -39,8 +39,8 @@
                     </li>
                     <li><a href="#" title="Messages"><i class="bi bi-envelope-fill"></i></a></li>
                     <li><a href="#" title="My Stuffs"><i class="bi bi-folder-fill"></i></a></li>
-                    <li><a href="#"><i></i> Join&nbsp;dijidaro</a></li>
-                    <li><a href="#"><i></i> Login</a></li>
+                    <li><a href="{{ url_for("auth.register_student") }}"><i></i> Join&nbsp;dijidaro</a></li>
+                    <li><a href="{{ url_for("auth.login_student") }}"><i></i> Login</a></li>
                 </ul>
                 <a href="#" class="close" aria-label="Close navigation panel">
                     <span class="visually-hidden">Close navigation panel</span>

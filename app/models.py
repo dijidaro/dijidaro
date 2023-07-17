@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class Students(db.Model):
+class Student(db.Model):
     __tablename__ = "students"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -12,5 +12,9 @@ class Students(db.Model):
     username = db.Column(db.String, nullable=False, unique=True)
     email = db.Column(db.String, unique=True)
     gender = db.Column(db.String, nullable=False)
+    birth_date = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+
+    def __repr__(self) -> str:
+        return f"Student(username={self.username}, gender={self.gender}, birth_date={self.birth_date})"
