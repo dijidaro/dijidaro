@@ -104,8 +104,23 @@ td {
   }
 th {
   background-color: var(--light-accent);
+  letter-spacing: 2px;
 }
 td {
-  border: 2px dotted var(--brand-color);
+  letter-spacing: 1px;
+  border: 3px dotted var(--brand-color);
   background-color: var(--light-shade) 
+}
+
+tbody td {
+  text-align: center;
+}
+
+tfoot th {
+  text-align: right;
+}
+
+thead th,
+tfoot th {
+  font-family: "Rock Salt", cursive;
 }
