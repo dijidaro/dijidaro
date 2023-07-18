@@ -5,15 +5,17 @@
 {% block body %}
     <table>
         <thead>
-            <th>ID</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>Birth date</th>
-            <!-- <th>Password</th> -->
-            <th>Date created</th>
+            <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Birth date</th>
+                <!-- <th>Password</th> -->
+                <th>Date created</th>
+            </tr>
         </thead>
         <tbody>
         {% for student in students %}
