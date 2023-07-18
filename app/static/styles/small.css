@@ -94,17 +94,19 @@ nav a {
 
 table {
   table-layout: fixed;
-  width: 100%;
   border-collapse: collapse;
   border: 3px solid crimson;
 }
 
 th,
 td {
-  padding: 20px;
-  border: 3px solid lightseagreen;
-  color: #f2a807;
+  padding: 10px;
+  color: var(--light-shade);
+  background-color: var(--light-accent);
   }
 th {
-  background-color: #2eb0d4;
+  background-color: var(--dark-accent);
+}
+tr {
+  border: 2px dotted var(--brand-color);
 }
