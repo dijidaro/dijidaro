@@ -31,5 +31,5 @@ class StudentLoginForm(FlaskForm):
 
 
 class DeleteForm(FlaskForm):
-    student_id = StringField("student_id", render_kw={"hidden":True})
+    student_id = StringField("student_id",)
     submit = SubmitField("Delete", render_kw={"style": "background-color:red", "style":"border:none"})
