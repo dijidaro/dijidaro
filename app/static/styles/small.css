@@ -95,18 +95,17 @@ nav a {
 table {
   table-layout: fixed;
   border-collapse: collapse;
-  border: 3px solid crimson;
 }
 
 th,
 td {
   padding: 10px;
-  color: var(--light-shade);
-  background-color: var(--light-accent);
+  color: var(--primary);
   }
 th {
-  background-color: var(--dark-accent);
+  background-color: var(--light-accent);
 }
-tr {
+td {
   border: 2px dotted var(--brand-color);
+  background-color: var(--light-shade) 
 }
