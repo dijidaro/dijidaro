@@ -30,7 +30,7 @@ def login_student():
     form = StudentLoginForm()
     return render_template("auth/login.html", form=form)
 
-@bp.route("/delete/<int:student_id>", methods=("POST"))
+@bp.route("/delete/<int:student_id>", methods=("POST", "GET"))
 def delete_student(student_id):
     student = Student.query.get(student_id)
     db.session.delete(student)
