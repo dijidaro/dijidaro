@@ -28,7 +28,7 @@
                 <!-- <td>{{ student.password }}</td> -->
                 <td>{{ student.created }}</td>
                 <td>
-                    <form action="{{ url_for("auth.delete_student", id=student.id) }}" method="post">
+                    <form action="{{ url_for("auth.delete_student", student_id=students["id"]) }}" method="post">
                         {{ form.csrf_token }}
                         {{ form.student_id }}
                         {{ form.submit }}
