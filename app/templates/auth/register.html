@@ -1,45 +1,75 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="container">
-    <h2>Create new account</h2>
-    <form action="" method="post">
-        {{ form.csrf_token }}
-        <div class="mb-3">
-            {{ form.firstname.label }}
-            {{ form.firstname }}
-        </div>
-        <div class="mb-3">
-            {{ form.lastname.label }}
-            {{ form.lastname }}
-        </div>
-        <div class="mb-3">
-            {{ form.gender.label }}
-            {{ form.gender }}
-        </div>
-        <div class="mb-3">
-            {{ form.birthdate.label }}
-            {{ form.birthdate }}
-        </div>
-        <div class="mb-3">
-            {{ form.username.label }}
-            {{ form.username }}
-        </div>
-        <div class="mb-3">
-            {{ form.email.label }}
-            {{ form.email }}
-        </div>
-        <div class="mb-3">
-            {{ form.password.label }}
-            {{ form.password }}
-        </div>
-        <div class="mb-3">
-            {{ form.password2.label }}
-            {{ form.password2 }}
-        </div>
-        <div class="mb-3">
-            {{ form.submit }}
-        </div>
-
-    </form>
+    <div class="auth-form shadow p-4 my-5">
+        <h2 class="py-3">Create new account</h2>
+        <hr class="mb-4">
+        <form method="post">
+            {{ form.csrf_token }}
+            <div class="row gx-5">
+                <div class="mb-3 col-md">
+                    {{ form.firstname.label(class="form-label")}}
+                    {% if form.firstname.required %}
+                        <span class="text-danger">*</span>
+                    {% endif %}
+                    {{ form.firstname }}
+                    {% if form.firstname.errors %}
+                    <ul class="error">
+                        {% for error in form.firstname.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div class="mb-3 col-md">
+                    {{ form.lastname.label(class="form-label") }}
+                    {{ form.lastname }}
+                    {% if form.lastname.errors %}
+                    <ul class="error">
+                        {% for error in form.lastname.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form.gender.label(class="form-label") }}
+                {{ form.gender }}
+            </div>
+            <div class="mb-3">
+                {{ form.birthdate.label(class="form-label") }}
+                {{ form.birthdate }}
+            </div>
+            <div class="mb-3">
+                {{ form.username.label(class="form-label") }}
+                {{ form.username }}
+            </div>
+            <div class="mb-3">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email }}
+            </div>
+            <div class="row gx-5">
+                <div class="mb-3 col-md">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                    <ul class="error">
+                        {% for error in form.password.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div class="mb-3 col-md">
+                    {{ form.password2.label(class="form-label") }}
+                    {{ form.password2 }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form.submit }}
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

@@ -3,7 +3,6 @@ from config import create_app
 from models import db
 from flask_migrate import Migrate
 
-
 app = create_app()
 
 db.init_app(app)
