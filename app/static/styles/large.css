@@ -46,4 +46,9 @@
         text-align: center;
         padding: .85rem;
     }
+
+    .auth-form {
+        max-width: 550px;
+        margin: 0 auto;
+    }
 }
