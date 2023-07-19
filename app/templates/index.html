@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container mt-5">
         {% if g.user %}
-            Loggen in as {{ g.user["username"] }}
+            <h2 class="my-3">Logged in as <span class="students">{{ g.user["username"] }}</span></h2>
         {% endif %}
     <table class="table table-sm table-success table-striped">
         <thead>
