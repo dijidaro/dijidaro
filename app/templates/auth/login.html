@@ -1,19 +1,32 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="container">
-    <form action="" method="post">
-        {{ form.csrf_token }}
-        <div class="mb-3">
-            {{ form.username.label }}
-            {{ form.username}}
-        </div>
-        <div class="mb-3">
-            {{ form.password.label }}
-            {{ form.password }}
-        </div>
-        <div class="mb-3">
-            {{ form.submit }}
-        </div>
-    </form>
+    <div class="auth-form shadow p-4 my-5">
+        <h2 class="py-3">Log in</h2>
+        <hr class="mb-4">
+            <form action="" method="post">
+                {{ form.csrf_token }}
+                <div class="mb-3">
+                    {{ form.username.label(class="form-label") }}
+                    {{ form.username}}
+                </div>
+                <div class="mb-3">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password }}
+                </div>
+                <!-- <div class="row"> -->
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" name="" id="rememberPassword">
+                    <label for="rememberPassword" class="form-check-label">Remember me</label>
+                </div>
+                <div class="mb-3 col-12">
+                    <a href="#" class="link">Reset password</a>
+                </div>
+                <!-- </div> -->
+                <div class="mb-3">
+                    {{ form.submit }}
+                </div>
+            </form>
+    </div>
 </div>
 {% endblock %}

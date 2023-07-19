@@ -93,14 +93,13 @@ nav a {
 }
 
 table {
-  table-layout: fixed;
+  /* table-layout: fixed; */
   border-collapse: collapse;
 }
 
 th,
 td {
-  padding: 10px;
-  color: var(--primary);
+  padding: 5px;
   }
 th {
   background-color: var(--light-accent);
@@ -108,12 +107,11 @@ th {
 }
 td {
   letter-spacing: 1px;
-  border: 3px dotted var(--brand-color);
   background-color: var(--light-shade) 
 }
 
 tbody td {
-  text-align: center;
+  border-right: 2px solid var(--light-accent);
 }
 
 tfoot th {
@@ -122,5 +120,15 @@ tfoot th {
 
 thead th,
 tfoot th {
-  font-family: "Rock Salt", cursive;
+  color: var(--light-shade);
+  text-align: center;
+  border: 2px solid var(--light-accent);
+  background-color: var(--brand-color) !important;
+}
+
+.auth-form h2 {
+  color: var(--brand-color2);
+  font-size: 2rem;
+  font-weight: 400;
+
 }
