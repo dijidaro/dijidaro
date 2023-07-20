@@ -133,6 +133,14 @@ tfoot th {
   height: auto;
 }
 
+.auth-form p, .auth-form a {
+  font-size: .85rem;
+}
+
+.auth-form a {
+  font-weight: 500;
+}
+
 /* .auth-form label {color: var(--brand-color3);} */
 
 input[type="button"], input[type="submit"] {
