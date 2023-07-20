@@ -23,7 +23,6 @@ def validate_password(password):
 @bp.route("/student_registration", methods=("GET", "POST"))
 def register_student():
     form = StudentRegistrationForm()
-
     if form.validate_on_submit():
         error = None
         if not validate_username(form.username.data.lower()):
@@ -40,24 +39,19 @@ def register_student():
                                 gender=form.gender.data, birth_date=form.birthdate.data, password=generate_password_hash(form.password.data) )
                 db.session.add(student)
                 db.session.commit()
-
             except IntegrityError as e:
                 error = f"Request failed! You either entered an already existing username and/or email. {e}"
                 db.session.rollback()
                 flash(error)
                 print(error)
-                
             else:
                 return redirect(url_for("auth.login_student"))
-        
         flash(error)
-
     return render_template("auth/register.html", form=form)
 
 
 @bp.route("student_login", methods=("GET", "POST"))
 def login_student():
-    
     form = StudentLoginForm()
     if form.validate_on_submit():
         error = None
@@ -70,17 +64,20 @@ def login_student():
         for row in student:
             if not check_password_hash(row.password, form.password.data):
                 error = errorMessage
-                
         if error is None:
             session.clear()
             session["user_id"] = row.id
             flash("Logged in successfully")
             return redirect(url_for("dashboard.index"))
-        
         flash(error)
-
     return render_template("auth/login.html", form=form)
 
+
+# Log out a student
+@bp.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("dashboard.index"))
 
 @bp.route("/delete/<int:student_id>", methods=("POST", "GET"))
 def delete_student(student_id):
@@ -91,7 +88,6 @@ def delete_student(student_id):
 
 @bp.before_app_request
 def load_logged_in_user():
-    
     student_id = session.get("user_id")
     if student_id is None:
         g.user = None
