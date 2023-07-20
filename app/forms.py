@@ -29,6 +29,7 @@ class StudentRegistrationForm(FlaskForm):
                               render_kw={"class":"form-control", "placeholder":"Password"})
     submit = SubmitField("Register", render_kw={"class":"btn button col-12" })
 
+
 class StudentLoginForm(FlaskForm):
     username = StringField("Username", render_kw={"class":"form-control", "placeholder":"Enter username"}, validators=[InputRequired(message="Username required")] )
     password = PasswordField("Password", render_kw={"class":"form-control", "placeholder":"Enter password"}, validators=[InputRequired(message="Password required")] )
