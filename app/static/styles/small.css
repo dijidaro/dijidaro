@@ -94,6 +94,10 @@ nav .dropdown-menu li {
   background-color: #faf9f1;
 }
 
+.auth-form {
+  padding: 25px;
+}
+
 .auth-form h2 {
   /* color: var(--brand-color3); */
   font-size: 1.9rem;
