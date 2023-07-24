@@ -28,7 +28,6 @@ def register_student():
         error = None
         if not validate_username(form.username.data.lower()):
             error = "Invalid username."
-
         if not validate_password(form.password.data):
             error = "Password must be at least 8 characters long, contains at least one uppercase letter, one lowercase letter, and one number."
             if not form.password.data == form.password2.data:

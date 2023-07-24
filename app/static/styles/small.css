@@ -94,6 +94,47 @@ nav .dropdown-menu li {
   background-color: #faf9f1;
 }
 
+table {
+  /* table-layout: fixed; */
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 5px;
+  }
+th {
+  background-color: var(--light-accent);
+  letter-spacing: 2px;
+}
+td {
+  letter-spacing: 1px;
+  background-color: var(--light-shade) 
+}
+
+tbody td {
+  border-right: 2px solid var(--light-accent);
+}
+
+tfoot th {
+  text-align: right;
+}
+
+thead th,
+tfoot th {
+  color: var(--light-shade);
+  text-align: center;
+  border: 2px solid var(--light-accent);
+  background-color: var(--brand-color) !important;
+}
+
+.auth-form h2 {
+  color: var(--brand-color2);
+  font-size: 2rem;
+  font-weight: 400;
+
+}
+
 .auth-form {
   padding: 25px;
 }

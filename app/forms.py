@@ -11,6 +11,7 @@ class StudentRegistrationForm(FlaskForm):
                             render_kw={"class":"form-control", "placeholder":"Enter last name"})
     username = StringField("Create username", validators = [InputRequired(message="Field required")],
                             render_kw={"class":"form-control", "placeholder":"Username",} )
+
     email = EmailField("Email address",
                         validators = [InputRequired(message="Field required")],
                         render_kw={"class":"form-control", "placeholder":"name@example.com", "aria-label":"Email address"} )
@@ -25,12 +26,12 @@ class StudentRegistrationForm(FlaskForm):
     password = PasswordField("Create password",
                              validators = [InputRequired(message="Field required"), 
                                            EqualTo("password2", message="Passwords must match.")],
+
                              render_kw={"class":"form-control", "placeholder":"Password"})
     password2 = PasswordField("Confirm password",
                               validators = [InputRequired(message="Field required")], 
                               render_kw={"class":"form-control", "placeholder":"Password"})
     submit = SubmitField("Register", render_kw={"class":"btn button col-12" })
-
 
 class StudentLoginForm(FlaskForm):
     username = StringField("Username", render_kw={"class":"form-control", "placeholder":"Enter username"}, validators=[InputRequired(message="Username required")] )
