@@ -1,9 +1,13 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% block body %}
 <div class="container">
-    <div class="auth-form shadow p-4 my-5">
-        <h2 class="py-3">Create new account</h2>
-        <hr class="mb-5">
+    <div class="auth-form shadow-lg my-5">
+        <h2 class="mb-2">Create new account</h2>
+        <p>Sign up for a new account to manage your subjects. You can <a href="{{ url_for("dashboard.index") }}" class="link">browse the various 
+            revision materials</a> without an account, but you will need to create a new one to save your revision materials.
+        </p>
+        <p>Already signed up? <a href="{{ url_for("auth.login_student") }}" class="link">Log in</a></p>
+        <hr class="mb-3">
         <form method="post">
             {{ form.csrf_token }}
             <div class="row">
@@ -70,6 +74,10 @@
                 {{ form.submit }}
             </div>
         </form>
+        <p>* &nbsp; Email addresses are not stored in a form that allows us to contact students.
+            Students will never receive emails from dijidaro except for password recovery.
+            See our <a href="#" class="link">privacy policy</a> for more information.
+        </p>
     </div>
 </div>
 {% endblock %}
