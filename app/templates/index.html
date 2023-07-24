@@ -17,7 +17,7 @@
                 <th>Email</th>
                 <th>Gender</th>
                 <th>Birth date</th>
-                <!-- <th>Password</th> -->
+                <th>Password</th>
                 <th>Date created</th>
             </tr>
         </thead>
@@ -32,7 +32,7 @@
                     <td>{{ student.email }}</td>
                     <td>{{ student.gender}}</td>
                     <td>{{ student.birth_date }}</td>
-                    <!-- <td>{{ student.password }}</td> -->
+                    <td>{{ student.password }}</td>
                     <td>{{ student.created }}</td>
                     <td>
                         <form action="{{ url_for("auth.delete_student", student_id=student.id) }}" method="post">
@@ -44,7 +44,7 @@
                 </tr>
             {% endfor %}
             {% else %}
-                <h2>Not logged in.</h2>
+                <h2>Not logged in. <a href="{{ url_for("auth.login_student") }}">Log in</a></h2>
         {% endif %}
         </tbody>
     </table>
