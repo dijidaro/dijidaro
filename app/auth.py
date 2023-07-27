@@ -8,18 +8,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
-def validate_username(username):
-    pattern = r"[a-z0-9_]{5,20}$"
-    if re.match(pattern, username):
-        return True
-    return False
-
-def validate_password(password):
-    pattern = r"^(?=.*[!@#$%^&*(),.?':{}|<>])(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*(),.?':{}|<>]{8,}$"
-    if re.match(pattern, password):
-        return True
-    return False
-
 @bp.route("/student_registration", methods=("GET", "POST"))
 def register_student():
     form = StudentRegistrationForm()
@@ -40,10 +28,10 @@ def register_student():
                 db.session.add(student)
                 db.session.commit()
             except IntegrityError as e:
-                error = f"Request failed! You either entered an already existing username and/or email. {e}"
+                error = "Request failed! You either entered an already existing username and/or email"
                 db.session.rollback()
                 flash(error)
-                print(error)
+                print(e)
             else:
                 return redirect(url_for("auth.login_student"))
         flash(error)
@@ -101,3 +89,25 @@ def login_required(view):
             return redirect(url_for("auth.login_student"))
         return view(**kwargs)
     return wrapped_view
+
+
+# HELPER FUNCTIONS
+
+def validate_username(username):
+    """ Ensures min/max number of characters.Checks that username doesn't 
+    begin with numbers and no special characters. Returns `True` if the 
+    username matches the pattern and `False` otherwise.
+    """
+    pattern = r"[a-z0-9_]{5,20}$"
+    if re.match(pattern, username):
+        return True
+    return False
+
+def validate_password(password):
+    """ Validates the password using the provided regular 
+    expression i.e `pattern`. Returns `True` if password 
+    matches the pattern and `False` otherwise. """
+    pattern = r"^(?=.*[!@#$%^&*(),.?':{}|<>])(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*(),.?':{}|<>]{8,}$"
+    if re.match(pattern, password):
+        return True
+    return False

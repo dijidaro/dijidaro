@@ -1,56 +1,55 @@
 @media (min-width: 992px) {
 
-    .hamburger,
-    .close {
-        display: none;
+    /* HEADER SECTION */
+    .hamburger, .close { display: none; }
+    header { background-color: var(--brand-color); }
+    header .navigation {
+        height: 50px;
+        max-width: 992px;
+        margin: 0 auto;
     }
-
     nav {
-        background-color: transparent;
-        height: auto;
-        width: 100%;
         position: static;
         transform: translateX(0);
-        align-items: center;
+        height: auto;
+        margin: 0 auto;
+        width: auto;
+        background: transparent;
     }
-
     nav ul {
-        margin: 0;
-        display: flex;
-        flex-flow: row;
+        flex-flow: row nowrap;
+        justify-content: center;
     }
-
-    nav ul li a:hover {
-        background-color: var(--brand-color2);
+    nav li:first-of-type a {
+        margin-top: inherit;
+      }
+    nav a {
+        font-size: .895em;
+        font-weight: 500;
+        padding: 13px 15px 4px 15px;
+        height: 50px;
     }
-
-    nav ul li input[type=search] {
+    nav a:hover {
+        background-color: var(--brand-color3);
+    }
+    nav input[type=search] {
         background-color: var(--brand-color2);
         border: none;
+        width: 300px;
     }
-
-    nav ul li input[type=search]:focus {
+    nav input[type=search]:focus {
         background-color: var(--brand-color3);
         color: var(--light-shade);
     }
-
-    nav ul li input[type=search]::placeholder {
+    nav input[type=search]::placeholder {
         color: var(--light-shade);
         opacity: .6;
         font-size: .85rem;
         height: 40px;
     }
-
-    nav a {
-        font-size: .895rem;
-        display: block;
-        text-align: center;
-        padding: .85rem;
-    }
-
     .auth-form {
         width: 450px;
         margin: 0 auto;
-        padding: 50px;
+        padding: 4rem;
     }
 }
