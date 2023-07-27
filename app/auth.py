@@ -11,11 +11,11 @@ bp = Blueprint("auth", __name__, url_prefix="/auth")
 @bp.route("/student_registration", methods=("GET", "POST"))
 def register_student():
     form = StudentRegistrationForm()
+
     if form.validate_on_submit():
         error = None
         if not validate_username(form.username.data.lower()):
             error = "Invalid username."
-
         if not validate_password(form.password.data):
             error = "Password must be at least 8 characters long, contains at least one uppercase letter, one lowercase letter, and one number."
             if not form.password.data == form.password2.data:
@@ -59,7 +59,6 @@ def login_student():
             return redirect(url_for("dashboard.index"))
         flash(error)
     return render_template("auth/login.html", form=form)
-
 
 # Log out a student
 @bp.route("/logout")

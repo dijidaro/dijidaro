@@ -84,6 +84,7 @@ nav .dropdown-menu a {
 .stuffs:hover, .messages:hover {
   transform: scale(1.2);
 }
+
 .auth-form {
   padding: 30px;
 }
