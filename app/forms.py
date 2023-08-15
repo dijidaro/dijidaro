@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 
-class StudentRegistrationForm(FlaskForm):
+class UserRegistrationForm(FlaskForm):
     firstname = StringField("First name",
                              validators = [InputRequired(message="Field required")],
                              render_kw={"class":"form-control", "placeholder":"Enter first name", "aria-label":"First name"})
@@ -11,6 +11,10 @@ class StudentRegistrationForm(FlaskForm):
                             render_kw={"class":"form-control", "placeholder":"Enter last name"})
     username = StringField("Create username", validators = [InputRequired(message="Field required")],
                             render_kw={"class":"form-control", "placeholder":"Username",} )
+    usertype = SelectField("User type",
+                        choices=[("","--Please choose an option--"), ("student", "Student"), ("educator", "Educator"), ("parent", "Parent") ], 
+                        validators=[InputRequired(message="Field required")],
+                        render_kw={"class":"form-select"})
 
     email = EmailField("Email address",
                         validators = [InputRequired(message="Field required")],
@@ -33,11 +37,11 @@ class StudentRegistrationForm(FlaskForm):
                               render_kw={"class":"form-control", "placeholder":"Password"})
     submit = SubmitField("Register", render_kw={"class":"btn button col-12" })
 
-class StudentLoginForm(FlaskForm):
+class UserLoginForm(FlaskForm):
     username = StringField("Username", render_kw={"class":"form-control", "placeholder":"Enter username"}, validators=[InputRequired(message="Username required")] )
     password = PasswordField("Password", render_kw={"class":"form-control", "placeholder":"Enter password"}, validators=[InputRequired(message="Password required")] )
     submit = SubmitField("Login", render_kw={"class":"btn button col-12"})
 
 class DeleteForm(FlaskForm):
-    student_id = StringField("student_id", render_kw={"hidden":True})
+    user_id = StringField("user_id", render_kw={"hidden":True})
     submit = SubmitField("X", render_kw={"class":"btn btn-outline-danger", "style":"--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"})
