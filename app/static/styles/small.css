@@ -28,11 +28,15 @@ body { min-height: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoo
 .button:hover { background-color: var(--tertiary-dark) !important; color: var(--light-shade) !important;}
 
 /* HEADER SECTION  */
-header .navigation {
+header {
+  background-color: var(--brand-color);
+  border-bottom: 2px solid rgba(0, 0, 0, .1);
+  box-shadow: 0 0 3px rgba(0, 0, 0, .25);
+}
+.navigation {
   display: flex;
   justify-content: space-between;
   height: 50px;
-  background-color: var(--brand-color);
   align-items: center;
 }
 nav {
@@ -102,4 +106,44 @@ nav .dropdown-menu a {
 
 .auth-form a {
   font-weight: 500;
+}
+
+/* HERO SECTION */
+.hero {
+  background-color: var(--brand-color);
+  height: 20rem;
+  display: flex;
+  align-items: center;
+  padding: 25px;
+}
+.hero-header span {
+  color: var(--light-shade);
+  font-size: 1.7rem;
+  font-weight: bold;
+  line-height: 1.5em;
+}
+
+.hero button {
+  background-color: var(--light-shade);
+  color: var(--brand-color);
+  font-weight: bold;
+  padding: 10px 25px;
+}
+.intro {
+  background-color: var(--light-shade);
+  text-align: center;
+}
+.intro-btn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+.intro-btn button {
+  background-color: var(--brand-color);
+  color: var(--light-shade);
+  border-radius: 1.5rem;
+  font-size: .8rem;
+  font-weight: 500;
+  padding: .5rem 1.5rem;
 }
