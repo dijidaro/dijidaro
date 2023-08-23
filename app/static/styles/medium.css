@@ -2,4 +2,15 @@
     /* nav {
         background-color: var(--brand-color);
     } */
+
+    /* HERO SECTION */
+    .hero {
+        min-height: 23rem;
+      }
+    .intro-btn {
+        justify-content: center;
+    }
+    .hero-header span {
+        font-size: 2rem;
+      }
  }

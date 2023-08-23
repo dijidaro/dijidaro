@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %} Welcome | DijiDaro {% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        {% if g.user %}
+            <h2 class="my-3">Logged in as <span class="students">{{ g.user["username"] }}</span></h2>
+        {% endif %}
+    <table class="table table-sm table-success table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Username</th>
+                <th>User type</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Birth date</th>
+                <th>Status</th>
+                <th>Date created</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if g.user %}
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.user_type }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.gender}}</td>
+                    <td>{{ user.birth_date }}</td>
+                    <td>{{ user.status }}</td>
+                    <td>{{ user.created }}</td>
+                    <td>
+                        <form action="{{ url_for('auth.delete_user', user_id=user.id) }}" method="post">
+                            {{ form.csrf_token }}
+                            {{ form.user_id }}
+                            {{ form.submit }}
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            {% else %}
+                <h2>Not logged in. <a href="{{ url_for('auth.login') }}">Log in</a></h2>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
