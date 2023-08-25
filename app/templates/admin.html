@@ -3,28 +3,30 @@
 {% block title %} Welcome | DijiDaro {% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        {% if g.user %}
-            <h2 class="my-3">Logged in as <span class="students">{{ g.user["username"] }}</span></h2>
-        {% endif %}
-    <table class="table table-sm table-success table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Username</th>
-                <th>User type</th>
-                <th>Email</th>
-                <th>Gender</th>
-                <th>Birth date</th>
-                <th>Status</th>
-                <th>Date created</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% if g.user %}
-            {% for user in users %}
+<div class="container mt-5">
+    {% if g.user %}
+    <h2 class="my-3">Logged in as <span class="students">{{ g.user["username"] }}</span></h2>
+    {% endif %}
+    <section>
+        <h2>USERS</h2>
+        <table class="table table-sm table-success table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Username</th>
+                    <th>User type</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Birth date</th>
+                    <th>Status</th>
+                    <th>Date created</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if g.user %}
+                {% for user in users %}
                 <tr>
                     <td>{{ user.id }}</td>
                     <td>{{ user.first_name }}</td>
@@ -44,11 +46,62 @@
                         </form>
                     </td>
                 </tr>
-            {% endfor %}
-            {% else %}
+                {% endfor %}
+                {% else %}
                 <h2>Not logged in. <a href="{{ url_for('auth.login') }}">Log in</a></h2>
-        {% endif %}
-        </tbody>
-    </table>
+                {% endif %}
+            </tbody>
+        </table>
+    </section>
+    <section class="container">
+        <h2>SUBJECTS</h2>
+        <table class="table table-sm table-success table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>CODE</th>
+                    <th>ABBR</th>
+                    <th>LEARNING AREA</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject in subjects %}
+                <tr>
+                    <td>{{ subject.id }}</td>
+                    <td>{{ subject.name }}</td>
+                    <td>{{ subject.code }}</td>
+                    <td>{{ subject.abbr }}</td>
+                    <td>{{ subject.learning_area }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>SCHOOLS</h2>
+        <table class="table table-sm table-success table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>CODE</th>
+                    <th>CATEGORY</th>
+                    <th>GENDER</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for school in schools %}
+                    <tr>
+                        <td>{{ school.id }}</td>
+                        <td>{{ school.name }}</td>
+                        <td>{{ school.code }}</td>
+                        <td>{{ school.category }}</td>
+                        <td>{{ school.gender }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
 </div>
 {% endblock %}
