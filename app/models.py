@@ -54,6 +54,8 @@ class Resource(db.Model):
     subject = db.relationship("Subject", backref=db.backref("resources", lazy=True))
     school_id = db.Column(db.Integer, db.ForeignKey("schools.id"))
     school = db.relationship("School", backref=db.backref("resources", lazy=True))
+    term = db.Column(db.String, nullable=False, unique=True)
+    year = db.Column(db.Integer, nullable=False, unique=True)
     file_url = db.Column(db.String, nullable=False, unique=True)
     thumbnail_url = db.Column(db.String, nullable=False, unique=True)
     likes = db.Column(db.Integer, default=0)

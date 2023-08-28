@@ -14,6 +14,9 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL").replace("://", "ql://", 1)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+    import upload
+    app.register_blueprint(upload.bp)
+    
     import dashboard
     app.register_blueprint(dashboard.bp)
     app.add_url_rule("/", endpoint="index")

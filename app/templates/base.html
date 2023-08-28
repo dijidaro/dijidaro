@@ -27,14 +27,14 @@
             <nav id="navbar">
                 <ul>
                     <li><a href="#">Explore</a></li>
-                    <li><a href="#">Upload</a></li>
+                    <li><a href="{{ url_for('upload.upload_resource') }}">Upload</a></li>
                     <li><a href="#">About</a></li>
                     <li>
                         <form action="" role="search">
                             <input type="search" class="form-control mt-2 mx-3" name="" id="" placeholder="Search" aria-label="Search">
                         </form>
                     </li>
-                    {% if g.user %}
+                    {% if g.user %} 
                     <li><a href="#" title="Messages"> <i class="bi bi-envelope messages"></i></a></li>
                     <li><a href="#" title="My Stuffs"> <i class="bi bi-folder stuffs"></i></a></li>
                     <li class="dropdown">
