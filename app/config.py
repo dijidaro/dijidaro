@@ -16,7 +16,7 @@ def create_app():
 
     import dashboard
     app.register_blueprint(dashboard.bp)
-    app.add_url_rule("/", endpoint="home")
+    app.add_url_rule("/", endpoint="index")
 
     import admin
     app.register_blueprint(admin.bp)
