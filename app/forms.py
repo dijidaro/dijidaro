@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileRequired, FileAllowed, FileSize
 from wtforms import *
 from wtforms.validators import *
 
@@ -45,3 +46,40 @@ class UserLoginForm(FlaskForm):
 class DeleteForm(FlaskForm):
     user_id = StringField("user_id", render_kw={"hidden":True})
     submit = SubmitField("X", render_kw={"class":"btn btn-outline-danger", "style":"--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"})
+
+class UploadForm(FlaskForm):
+    resource = SelectField("Resource Name",
+                           choices=[("","--Please choose an option--"), ("kcse", "Kenya Certificate of Secondary Education (KCSE)"), 
+                                    ("kcpe", "Kenya Certificate of Primary Education (KCPE)"), ("mock", "Mock Exam"), 
+                                    ("term1", "End Term 1"), ("term2", "End Term 2"), ("term3", "End Term 3"), ("cat", "Continous Assessment Test (CAT)")], 
+                            validators=[InputRequired(message="Field required")],
+                            render_kw={"class":"form-select"})
+    
+    subject = SelectField("Subject",
+                          choices=[("","--Please choose an option"), ("maths", "Mathematics"), 
+                                    ("english", "English"), ("kiswahili", "Kiswahili"), 
+                                    ("biology", "Biology"), ("geography", "Geography")],
+                          validators=[InputRequired(message="Field required")],
+                          render_kw={"class":"form-select"})
+    
+    school = StringField("School", validators = [InputRequired(message="Field required")],
+                            render_kw={"class": "form-control", "placeholder":"Enter school"})
+    
+    term = SelectField("Term", 
+                       choices=[("", "--Select school term"), ("KNEC", "KNEC"), ("One", "One"), ("Two", "Two"), ("Three", "Three")],
+                       validators=[InputRequired(message="Field required")], 
+                       render_kw={"class":"form-select"})
+    
+    year = IntegerField("Year", validators = [InputRequired(message="Field required")],
+                            render_kw={"class":"form-control", "placeholder":"Enter year"})
+    
+    upload = FileField("Select File to Upload", 
+                       validators=[
+                           FileRequired(message="Field required"), 
+                           FileAllowed("pdf", message="Only pdf files allowed"),
+                           FileSize(max_size=3145728, min_size=1, message="File size exceeded the maximum limit.")
+                           ], 
+                       render_kw={"class":"form-control", "accept": "application/pdf"})
+
+    submit = SubmitField("Upload", render_kw={"class":"btn button col-12"})
+    
