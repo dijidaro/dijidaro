@@ -4,36 +4,78 @@
     <div class="container">
         <h1>Upload</h1>
         <section class="p-3">
-            <form action="" method="post">
-                {{ form.csrf_token }}
-                <div class="mb-3">
-                    {{ form.resource.label(class="form-label")}}
-                    {{ form.resource }}
-                </div>
-                <div class="mb-3">
-                    {{ form.subject.label(class="form-label")}}
-                    {{ form.subject }}
-                </div>
-                <div class="mb-3">
-                    {{ form.school.label(class="form-label")}}
-                    {{ form.school }}
-                </div>
-                <div class="mb-3">
-                    {{ form.term.label(class="form-label")}}
-                    {{ form.term }}
-                </div>
-                <div class="mb-3">
-                    {{ form.year.label(class="form-label")}}
-                    {{ form.year }}
-                </div>
-                <div class="mb-3">
-                    {{ form.upload.label(class="form-label")}}
-                    {{ form.upload }}
-                </div>
-                <div class="mb-3">
-                    {{ form.submit }}
-                </div>
-            </form>
+                <form method="post" enctype="multipart/form-data">
+                    {{ form.csrf_token }}
+                    <div class="mb-3">
+                        {{ form.resource.label(class="form-label")}}
+                        {{ form.resource }}
+                        {% if form.resource.errors %}
+                            <ul class="error">
+                                {% for error in form.resource.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.subject.label(class="form-label")}}
+                        {{ form.subject }}
+                        {% if form.subject.errors %}
+                            <ul class="error">
+                                {% for error in form.subject.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.school.label(class="form-label")}}
+                        {{ form.school }}
+                        {% if form.school.errors %}
+                            <ul class="error">
+                                {% for error in form.school.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.term.label(class="form-label")}}
+                        {{ form.term }}
+                        {% if form.term.errors %}
+                            <ul class="error">
+                                {% for error in form.term.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.year.label(class="form-label")}}
+                        {{ form.year }}
+                        {% if form.year.errors %}
+                            <ul class="error">
+                                {% for error in form.year.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.uploaded_resource.label(class="form-label")}}
+                        {{ form.uploaded_resource }}
+                        {% if form.resource.errors %}
+                            <ul class="error">
+                                {% for error in form.resource.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.submit }}
+                    </div>
+                </form>
         </section>
     </div>
 {% endblock %}

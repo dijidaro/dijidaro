@@ -13,7 +13,13 @@ def create_app():
     # app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL").replace("://", "ql://", 1)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+    # Set the upload folder
+    app.config["UPLOAD_FOLDER"] = "uploads"
 
+    # Ensure the UPLOAD_FOLDER directory exists
+    os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+    
     import upload
     app.register_blueprint(upload.bp)
     

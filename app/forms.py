@@ -37,7 +37,7 @@ class UserRegistrationForm(FlaskForm):
                               validators = [InputRequired(message="Field required")], 
                               render_kw={"class":"form-control", "placeholder":"Password"})
     submit = SubmitField("Register", render_kw={"class":"btn button col-12" })
-
+ 
 class UserLoginForm(FlaskForm):
     username = StringField("Username", render_kw={"class":"form-control", "placeholder":"Enter username"}, validators=[InputRequired(message="Username required")] )
     password = PasswordField("Password", render_kw={"class":"form-control", "placeholder":"Enter password"}, validators=[InputRequired(message="Password required")] )
@@ -48,17 +48,18 @@ class DeleteForm(FlaskForm):
     submit = SubmitField("X", render_kw={"class":"btn btn-outline-danger", "style":"--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"})
 
 class UploadForm(FlaskForm):
+
     resource = SelectField("Resource Name",
                            choices=[("","--Please choose an option--"), ("kcse", "Kenya Certificate of Secondary Education (KCSE)"), 
                                     ("kcpe", "Kenya Certificate of Primary Education (KCPE)"), ("mock", "Mock Exam"), 
-                                    ("term1", "End Term 1"), ("term2", "End Term 2"), ("term3", "End Term 3"), ("cat", "Continous Assessment Test (CAT)")], 
+                                    ("End Term", "End Term"), ("cat", "Continous Assessment Test (CAT)")], 
                             validators=[InputRequired(message="Field required")],
                             render_kw={"class":"form-select"})
     
     subject = SelectField("Subject",
-                          choices=[("","--Please choose an option"), ("maths", "Mathematics"), 
-                                    ("english", "English"), ("kiswahili", "Kiswahili"), 
-                                    ("biology", "Biology"), ("geography", "Geography")],
+                          choices=[("","--Please choose an option"), ("Mathematics", "Mathematics"), 
+                                    ("English", "English"), ("Kiswahili", "Kiswahili"), 
+                                    ("Biology", "Biology"), ("Geography", "Geography")],
                           validators=[InputRequired(message="Field required")],
                           render_kw={"class":"form-select"})
     
@@ -70,16 +71,14 @@ class UploadForm(FlaskForm):
                        validators=[InputRequired(message="Field required")], 
                        render_kw={"class":"form-select"})
     
-    year = IntegerField("Year", validators = [InputRequired(message="Field required")],
+    year = IntegerField("Year (e.g 1991)", validators = [InputRequired(message="Field required")],
                             render_kw={"class":"form-control", "placeholder":"Enter year"})
     
-    upload = FileField("Select File to Upload", 
-                       validators=[
-                           FileRequired(message="Field required"), 
-                           FileAllowed("pdf", message="Only pdf files allowed"),
-                           FileSize(max_size=3145728, min_size=1, message="File size exceeded the maximum limit.")
-                           ], 
+    uploaded_resource = FileField("Select File to Upload", 
+                       validators=[ 
+                           FileRequired(message="Field required"),
+                           FileAllowed("pdf", message="Only pdf files allowed."),
+                           FileSize(max_size=3145728, min_size=10, message="File size is exceeded 3MB")], 
                        render_kw={"class":"form-control", "accept": "application/pdf"})
 
-    submit = SubmitField("Upload", render_kw={"class":"btn button col-12"})
-    
+    submit = SubmitField("Upload", render_kw={"class": "btn button col-12"})
