@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileRequired, FileAllowed, FileSize
 from wtforms import *
 from wtforms.validators import *
+import datetime
 
 class UserRegistrationForm(FlaskForm):
     firstname = StringField("First name",
@@ -48,7 +49,7 @@ class DeleteForm(FlaskForm):
     submit = SubmitField("X", render_kw={"class":"btn btn-outline-danger", "style":"--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"})
 
 class UploadForm(FlaskForm):
-
+    current_year = datetime.datetime.now().year
     resource = SelectField("Resource Name",
                            choices=[("","--Please choose an option--"), ("kcse", "Kenya Certificate of Secondary Education (KCSE)"), 
                                     ("kcpe", "Kenya Certificate of Primary Education (KCPE)"), ("mock", "Mock Exam"), 
@@ -71,14 +72,18 @@ class UploadForm(FlaskForm):
                        validators=[InputRequired(message="Field required")], 
                        render_kw={"class":"form-select"})
     
-    year = IntegerField("Year (e.g 1991)", validators = [InputRequired(message="Field required")],
+    year = IntegerField("Year (e.g 1991)", 
+                        validators = [
+                            InputRequired(message="Field required"),
+                            NumberRange(min=1985, max=datetime.datetime.now().year, message="Invalid year.")             
+                            ],
                             render_kw={"class":"form-control", "placeholder":"Enter year"})
     
     uploaded_resource = FileField("Select File to Upload", 
                        validators=[ 
                            FileRequired(message="Field required"),
-                           FileAllowed("pdf", message="Only pdf files allowed."),
-                           FileSize(max_size=3145728, min_size=10, message="File size is exceeded 3MB")], 
+                           FileAllowed(["pdf",], "Only pdf files allowed."),
+                           FileSize(max_size=3145728, min_size=10, message="File size has exceeded 3MB")], 
                        render_kw={"class":"form-control", "accept": "application/pdf"})
 
     submit = SubmitField("Upload", render_kw={"class": "btn button col-12"})

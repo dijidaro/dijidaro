@@ -3,7 +3,7 @@
 {% block body %}
     <div class="container">
         <h1>Upload</h1>
-        <section class="p-3">
+        <section class="upload-form p-3">
                 <form method="post" enctype="multipart/form-data">
                     {{ form.csrf_token }}
                     <div class="mb-3">
@@ -64,9 +64,9 @@
                     <div class="mb-3">
                         {{ form.uploaded_resource.label(class="form-label")}}
                         {{ form.uploaded_resource }}
-                        {% if form.resource.errors %}
+                        {% if form.uploaded_resource.errors %}
                             <ul class="error">
-                                {% for error in form.resource.errors %}
+                                {% for error in form.uploaded_resource.errors %}
                                     <li>{{ error }}</li>
                                 {% endfor %}
                             </ul>
