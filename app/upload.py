@@ -3,10 +3,12 @@ from forms import UploadForm
 from werkzeug.utils import secure_filename
 import os
 import magic
+from auth import login_required
 
 bp = Blueprint("upload", __name__)
 
 @bp.route("/upload", methods=("GET", "POST"))
+@login_required
 def upload_resource():
     ## TO DO
     # 1. Grab form data
