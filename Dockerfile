@@ -16,5 +16,6 @@ COPY /app .
 
 # Defines environment variables
 ENV FLASK_APP=app.py
+ENV FLASK_DEBUG=True
 
 CMD ["python", "app.py"]

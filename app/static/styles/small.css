@@ -108,6 +108,10 @@ nav .dropdown-menu a {
   font-weight: 500;
 }
 
+.flashes {
+  background-color: #6ab2d1;
+}
+
 /* HERO SECTION */
 .hero {
   background-color: var(--brand-color);
