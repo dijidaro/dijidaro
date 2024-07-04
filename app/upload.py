@@ -1,9 +1,10 @@
-from flask import Blueprint, current_app, render_template, flash
+from flask import Blueprint, current_app, render_template, flash, abort
 from forms import UploadForm
 from werkzeug.utils import secure_filename
 import os
-import magic
 from auth import login_required
+import pymupdf
+from io import BytesIO
 
 bp = Blueprint("upload", __name__)
 
@@ -20,30 +21,33 @@ def upload_resource():
     form = UploadForm()
     if form.validate_on_submit():
         error = None
-        f = form.uploaded_resource.data
-        if not is_valid_pdf(f):
-            error = "Seems like the provided document is not a PDF file. Kindly check the instructions before uploading again."
+        file = form.uploaded_resource.data
+        if file:
+            try:
+                resource = pymupdf.Document(stream=BytesIO(file.read()), filetype="pdf")
+            except OSError as oe:
+                abort(400, f"Server only accepts Buffer streams {oe}")
+        
         if error is None:
-            filename = secure_filename(f"{form.school.data.upper()}_{form.subject.data.upper()}_{form.resource.data.upper()}_TERM_{form.term.data.upper()}_{form.year.data}.pdf")
-            file_path = os.path.join(current_app.config["UPLOAD_FOLDER"], filename)
-            print(file_path)
-            print(filename)
-            f.save(file_path)
-            flash("File has been uploaded successfully")
-            return render_template("resources.html")
+            resource_text = resource[0].get_text().strip()
+            # filename = secure_filename(f"{form.school.data.upper()}_{form.subject.data.upper()}_{form.resource.data.upper()}_TERM_{form.term.data.upper()}_{form.year.data}.pdf")
+            return f"{resource_text}"
         flash(error)
     return render_template("upload.html", form=form)
 
 
-def is_valid_pdf(file_descriptor):
-    """
-    Uses the `python-magic` library to detect the MIME type of the uploaded file to verify if it's
-     a PDF. Returns `true` if it is a PDF and `false` otherwise.
-    """
-    # Create a Magic object for MIME type detection
-    mime_magic = magic.Magic(mime=True)
 
-    # Detect the MIME type of the uploaded file
-    mime_type = mime_magic.from_buffer(file_descriptor.read(2048))
-    
-    return mime_type == "application/pdf"
+def is_valid_resource(file_descriptor):
+    """
+    Uses the `pymupdf` library to read buffer from stream and validate the file type.
+    Returns `True` if its a valid PDF and `False` otherwise.
+    """
+    try:
+        resource = pymupdf.Document(stream=BytesIO(file_descriptor.read()), filetype="pdf")
+    except OSError as oe:
+        abort(400, f"Server only accepts Buffer streams {oe}")
+    try:
+        if resource.is_pdf:
+            return True
+    except Exception as e:
+        abort(e, f"You request cannot be processed. Please try again later. {e}")
