@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% block title %} Explore {% endblock %}
 {% block body %}
-    <h1>Explore</h1>
+    <h1>Uploaded files</h1>
+    <h2>Page Text Data</h2>
+    {% if text %}
+        <p>{{ text }}</p>
+    {% endif %}
+    <p>Nada! {{ era }}</p>
 {% endblock %}

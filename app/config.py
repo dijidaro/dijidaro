@@ -17,7 +17,8 @@ def create_app():
     # Setup upload folder
     app.config["UPLOAD_FOLDER"] = os.path.join(os.path.dirname(__file__), "uploads")
     app.add_url_rule("/uploads/<name>", endpoint="download_file", build_only=True)
-    os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+    if not os.path.exists(app.config["UPLOAD_FOLDER"]):
+        os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
     
     import explore
     app.register_blueprint(explore.bp)
