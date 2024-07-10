@@ -1,49 +1,114 @@
-from flask import Blueprint, current_app, render_template, flash, abort, redirect, url_for
+from flask import Blueprint, current_app, render_template, flash, g, send_from_directory
 from forms import UploadForm
 from werkzeug.utils import secure_filename
 import os
 from auth import login_required
 import pymupdf
 from io import BytesIO
-import json
+import time
+from datetime import datetime
 
 bp = Blueprint("upload", __name__)
+os.environ['TESSDATA_PREFIX'] = '/usr/share/tesseract-ocr/4.00/tessdata/'
 
 @bp.route("/upload", methods=("GET", "POST"))
 @login_required
 def upload_resource():
-    #TO DO
+    # TO DO
     # 1. Grab form data
     # 2. Check if file is indeed pdf. i.e use pdf signatures
     # 3. Check if file contents matches the grabbed form data
     # 4. Save the resource data to a database and the file to a file server storage.
     # 5. Redirect to a success page.
+    uploads_folder = current_app.config["UPLOAD_FOLDER"]
+    start_time = time.time()
     form = UploadForm()
     if form.validate_on_submit():
-        uploads_folder = current_app.config["UPLOAD_FOLDER"]
-        resource_file = form.uploaded_resource.data
-        resource_form_data = {
-            "subject": form.subject.data.upper(),
-            "school" : form.school.data.upper(),
-            "term" : form.term.data.upper(),
-            "year" : form.year.data        
+        error = None
+        try:
+            resource = pymupdf.Document(stream=BytesIO(form.uploaded_resource.data.read()), filetype="pdf")
+        except Exception as e:
+            return f"Error reading file. {e}"
+               
+        form_data = {
+            "subject" : form.subject.data,
+            "school" : form.school.data,
+            "term" : form.term.data,
+            "year" : form.year.data,
         }
-        missing_resource_form_data = {}
-        resource_stream_data = pymupdf.Document(stream=BytesIO(resource_file.read()), filetype="pdf")
-        resource_text = resource_stream_data[0].get_text("text").strip().upper()
-        is_valid = is_valid_resource(resource_form_data, resource_text, missing_resource_form_data)
-        if is_valid:
-            resource_name = secure_filename(f"{resource_form_data['subject']}_{resource_form_data['school']}_{resource_form_data['term']}_{resource_form_data['year']}.pdf").lower()
+        missing_form_data = {}
+        resource_first_page = resource[0]
+        resource_text = extract_resource_text(resource_first_page)
+        if not is_valid_resource(form_data, resource_text, missing_form_data):
+            error = f"The contents of the uploaded file do not match the information provided in the form. Please ensure that the file content correctly reflects the form data."
+        if error is None:
+            resource_name = secure_filename(f"{form_data['school']}_{form_data['subject'][:4]}_term_{form_data['term']}_{form_data['year']}.pdf").lower()
             resource_path = os.path.join(uploads_folder, resource_name)
-            resource_stream_data.save(resource_path)
-            flash("Success :)")
-            return render_template('explore.html', text=resource_text)
-        flash(f"Error processing {json.dumps(missing_resource_form_data)}")
+            resource_pix = resource_first_page.get_pixmap()
+            resource_thumb_name = secure_filename(f"{form_data['school']}_{form_data['subject'][:4]}_term_{form_data['term']}_{form_data['year']}.jpeg").lower()
+            resource_thumb_path = os.path.join(uploads_folder, resource_thumb_name)
+            form_data["category"] = form.resource.data
+            form_data["resource_name"] = resource_name
+            form_data["resource_url"] = resource_path
+            form_data["thumbnail"] = resource_thumb_name
+            form_data["thumbnail_url"] = resource_thumb_path
+            form_data["uploaded_by"] = g.user.username
+            form_data["date_uploaded"] = datetime.now()
+            resource_pix.save(resource_thumb_path, output=None, jpg_quality=95)
+            resource.save(resource_path)
+            resource.close()
+            end_time = time.time()
+            execution_time = end_time - start_time
+            return render_template("explore.html", text=resource_text, form_data=form_data, duration=str(format(execution_time, '.2f')))
+        flash(error)
     return render_template("upload.html", form=form)
+
+
+@bp.route("/uploads/<filename>")
+def uploaded_file(filename):
+    uploads_folder = current_app.config["UPLOAD_FOLDER"]
+    return send_from_directory(uploads_folder, filename)
+
+
+@bp.route("/download/<filename>")
+def download_file(filename):
+    uploads_folder = current_app.config["UPLOAD_FOLDER"]
+    return send_from_directory(uploads_folder, filename)
 
 def is_valid_resource(form_data_dict, text, missing_values):
     for key, value in form_data_dict.items():
-        if str(value) not in text:
+        if str(value).upper() not in text.upper():
             missing_values[key] = value
             return False
     return True
+
+def extract_resource_text(page):
+    partial_text_page = page.get_textpage_ocr(flags=0, language="eng", dpi=72, tessdata=os.environ['TESSDATA_PREFIX'], full=False)
+    page_text = page.get_text(textpage=partial_text_page, sort=True).strip()
+    return page_text
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
