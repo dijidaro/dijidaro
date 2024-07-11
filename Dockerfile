@@ -9,6 +9,12 @@ COPY ./requirements.txt .
 RUN python3 -m venv /venv
 ENV PATH="/app/venv/bin:$PATH"
 
+# Install necessary system dependencies
+RUN apt-get update && apt-get install -y \
+    tesseract-ocr \
+    libtesseract-dev \
+    && apt-get clean
+
 # Install dependencies.
 RUN pip install --no-cache-dir -q -r requirements.txt
 
@@ -17,5 +23,6 @@ COPY /app .
 # Defines environment variables
 ENV FLASK_APP=app.py
 ENV FLASK_DEBUG=True
+ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata/
 
 CMD ["python", "app.py"]
