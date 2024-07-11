@@ -16,10 +16,15 @@
                                 {% endfor %}
                             </ul>
                         {% endif %}
-                    </div>
+                    </div> 
                     <div class="mb-3">
                         {{ form.subject.label(class="form-label")}}
-                        {{ form.subject }}
+                        {{ form.subject(list='id_subjectlist') }}
+                        <datalist id="id_subjectlist">
+                            {% for subject in data['subjects'] %}
+                            <option value="{{ subject.name }}">
+                            {% endfor %}
+                        </datalist>
                         {% if form.subject.errors %}
                             <ul class="error">
                                 {% for error in form.subject.errors %}
@@ -30,7 +35,12 @@
                     </div>
                     <div class="mb-3">
                         {{ form.school.label(class="form-label")}}
-                        {{ form.school }}
+                        {{ form.school(list='id_schoolslist') }}
+                        <datalist id="id_schoolslist">
+                            {% for school in data['schools'] %}
+                            <option value="{{ school.name }}">
+                            {% endfor %}
+                        </datalist>
                         {% if form.school.errors %}
                             <ul class="error">
                                 {% for error in form.school.errors %}
