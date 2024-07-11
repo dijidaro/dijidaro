@@ -60,7 +60,7 @@ class UploadForm(FlaskForm):
     subject = SelectField("Subject",
                           choices=[("","--Please choose an option"), ("Mathematics", "Mathematics"), 
                                     ("English", "English"), ("Kiswahili", "Kiswahili"), 
-                                    ("Biology", "Biology"), ("Geography", "Geography")],
+                                    ("Biology", "BIOLOGY"), ("Geography", "Geography")],
                           validators=[InputRequired(message="Field required")],
                           render_kw={"class":"form-select"})
     

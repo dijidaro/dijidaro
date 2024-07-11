@@ -1,49 +1,114 @@
-from flask import Blueprint, current_app, render_template, flash
+from flask import Blueprint, current_app, render_template, flash, g, send_from_directory
 from forms import UploadForm
 from werkzeug.utils import secure_filename
 import os
-import magic
 from auth import login_required
+import pymupdf
+from io import BytesIO
+import time
+from datetime import datetime
 
 bp = Blueprint("upload", __name__)
+os.environ['TESSDATA_PREFIX'] = '/usr/share/tesseract-ocr/4.00/tessdata/'
 
 @bp.route("/upload", methods=("GET", "POST"))
 @login_required
 def upload_resource():
-    ## TO DO
+    # TO DO
     # 1. Grab form data
     # 2. Check if file is indeed pdf. i.e use pdf signatures
     # 3. Check if file contents matches the grabbed form data
     # 4. Save the resource data to a database and the file to a file server storage.
     # 5. Redirect to a success page.
-    
+    uploads_folder = current_app.config["UPLOAD_FOLDER"]
+    start_time = time.time()
     form = UploadForm()
     if form.validate_on_submit():
         error = None
-        f = form.uploaded_resource.data
-        if not is_valid_pdf(f):
-            error = "Seems like the provided document is not a PDF file. Kindly check the instructions before uploading again."
+        try:
+            resource = pymupdf.Document(stream=BytesIO(form.uploaded_resource.data.read()), filetype="pdf")
+        except Exception as e:
+            return f"Error reading file. {e}"
+               
+        form_data = {
+            "subject" : form.subject.data,
+            "school" : form.school.data,
+            "term" : form.term.data,
+            "year" : form.year.data,
+        }
+        missing_form_data = {}
+        resource_first_page = resource[0]
+        resource_text = extract_resource_text(resource_first_page)
+        if not is_valid_resource(form_data, resource_text, missing_form_data):
+            error = f"The contents of the uploaded file do not match the information provided in the form. Please ensure that the file content correctly reflects the form data."
         if error is None:
-            filename = secure_filename(f"{form.school.data.upper()}_{form.subject.data.upper()}_{form.resource.data.upper()}_TERM_{form.term.data.upper()}_{form.year.data}.pdf")
-            file_path = os.path.join(current_app.config["UPLOAD_FOLDER"], filename)
-            print(file_path)
-            print(filename)
-            f.save(file_path)
-            flash("File has been uploaded successfully")
-            return render_template("resources.html")
+            resource_name = secure_filename(f"{form_data['school']}_{form_data['subject'][:4]}_term_{form_data['term']}_{form_data['year']}.pdf").lower()
+            resource_path = os.path.join(uploads_folder, resource_name)
+            resource_pix = resource_first_page.get_pixmap()
+            resource_thumb_name = secure_filename(f"{form_data['school']}_{form_data['subject'][:4]}_term_{form_data['term']}_{form_data['year']}.jpeg").lower()
+            resource_thumb_path = os.path.join(uploads_folder, resource_thumb_name)
+            form_data["category"] = form.resource.data
+            form_data["resource_name"] = resource_name
+            form_data["resource_url"] = resource_path
+            form_data["thumbnail"] = resource_thumb_name
+            form_data["thumbnail_url"] = resource_thumb_path
+            form_data["uploaded_by"] = g.user.username
+            form_data["date_uploaded"] = datetime.now()
+            resource_pix.save(resource_thumb_path, output=None, jpg_quality=95)
+            resource.save(resource_path)
+            resource.close()
+            end_time = time.time()
+            execution_time = end_time - start_time
+            return render_template("explore.html", text=resource_text, form_data=form_data, duration=str(format(execution_time, '.2f')))
         flash(error)
     return render_template("upload.html", form=form)
 
 
-def is_valid_pdf(file_descriptor):
-    """
-    Uses the `python-magic` library to detect the MIME type of the uploaded file to verify if it's
-     a PDF. Returns `true` if it is a PDF and `false` otherwise.
-    """
-    # Create a Magic object for MIME type detection
-    mime_magic = magic.Magic(mime=True)
+@bp.route("/uploads/<filename>")
+def uploaded_file(filename):
+    uploads_folder = current_app.config["UPLOAD_FOLDER"]
+    return send_from_directory(uploads_folder, filename)
 
-    # Detect the MIME type of the uploaded file
-    mime_type = mime_magic.from_buffer(file_descriptor.read(2048))
-    
-    return mime_type == "application/pdf"
+
+@bp.route("/download/<filename>")
+def download_file(filename):
+    uploads_folder = current_app.config["UPLOAD_FOLDER"]
+    return send_from_directory(uploads_folder, filename)
+
+def is_valid_resource(form_data_dict, text, missing_values):
+    for key, value in form_data_dict.items():
+        if str(value).upper() not in text.upper():
+            missing_values[key] = value
+            return False
+    return True
+
+def extract_resource_text(page):
+    partial_text_page = page.get_textpage_ocr(flags=0, language="eng", dpi=72, tessdata=os.environ['TESSDATA_PREFIX'], full=False)
+    page_text = page.get_text(textpage=partial_text_page, sort=True).strip()
+    return page_text
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,7 +15,7 @@ class User(db.Model):
     gender = db.Column(db.String, nullable=False)
     birth_date = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
-    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    created = db.Column(db.DateTime, nullable=False, default=datetime.now())
     status = db.Column(db.String, nullable=False, default="Active")
 
     def __repr__(self) -> str:
@@ -62,4 +62,4 @@ class Resource(db.Model):
     views = db.Column(db.Integer, default=0)
     downloads = db.Column(db.Integer, default=0)
     uploaded_by = db.Column(db.String, nullable=False)
-    date_uploaded = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    date_uploaded = db.Column(db.DateTime, nullable=False, default=datetime.now())

@@ -13,9 +13,9 @@ def register():
     form = UserRegistrationForm()
     if form.validate_on_submit():
         error = None
-        if not validate_username(form.username.data.lower()):
+        if not is_valid_username(form.username.data.lower()):
             error = "Invalid username."
-        if not validate_password(form.password.data):
+        if not is_valid_password(form.password.data):
             error = "Password must be at least 8 characters long, contains at least one uppercase letter, one lowercase letter, and one number."
             if not form.password.data == form.password2.data:
                 error = "Passwords must match."
@@ -33,7 +33,7 @@ def register():
                 db.session.rollback()
                 flash(error)
                 print(e)
-            else:
+            finally:
                 return redirect(url_for("auth.login"))
         flash(error)
     return render_template("auth/register.html", form=form)
@@ -93,7 +93,7 @@ def login_required(view):
 
 # HELPER FUNCTIONS
 
-def validate_username(username):
+def is_valid_username(username):
     """ Ensures min/max number of characters.Checks that username doesn't 
     begin with numbers and no special characters. Returns `True` if the 
     username matches the pattern and `False` otherwise.
@@ -103,7 +103,7 @@ def validate_username(username):
         return True
     return False
 
-def validate_password(password):
+def is_valid_password(password):
     """ Validates the password using the provided regular 
     expression i.e `pattern`. Returns `True` if password 
     matches the pattern and `False` otherwise. """
