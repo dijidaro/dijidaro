@@ -7,6 +7,7 @@ import pymupdf
 from io import BytesIO
 import time
 from datetime import datetime
+from models import Subject, School
 
 bp = Blueprint("upload", __name__)
 os.environ['TESSDATA_PREFIX'] = '/usr/share/tesseract-ocr/4.00/tessdata/'
@@ -23,6 +24,10 @@ def upload_resource():
     uploads_folder = current_app.config["UPLOAD_FOLDER"]
     start_time = time.time()
     form = UploadForm()
+    data_list = {
+        "subjects" : Subject().query.all(),
+        "schools" : School().query.all()
+    }
     if form.validate_on_submit():
         error = None
         try:
@@ -61,7 +66,7 @@ def upload_resource():
             execution_time = end_time - start_time
             return render_template("explore.html", text=resource_text, form_data=form_data, duration=str(format(execution_time, '.2f')))
         flash(error)
-    return render_template("upload.html", form=form)
+    return render_template("upload.html", form=form, data=data_list)
 
 
 @bp.route("/uploads/<filename>")

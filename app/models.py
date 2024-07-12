@@ -50,6 +50,7 @@ class Resource(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=True)
+    category = db.Column(db.String, nullable=False)
     subject_id = db.Column(db.Integer, db.ForeignKey("subjects.id"))
     subject = db.relationship("Subject", backref=db.backref("resources", lazy=True))
     school_id = db.Column(db.Integer, db.ForeignKey("schools.id"))

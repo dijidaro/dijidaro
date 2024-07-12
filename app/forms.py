@@ -57,15 +57,11 @@ class UploadForm(FlaskForm):
                             validators=[InputRequired(message="Field required")],
                             render_kw={"class":"form-select"})
     
-    subject = SelectField("Subject",
-                          choices=[("","--Please choose an option"), ("Mathematics", "Mathematics"), 
-                                    ("English", "English"), ("Kiswahili", "Kiswahili"), 
-                                    ("Biology", "BIOLOGY"), ("Geography", "Geography")],
-                          validators=[InputRequired(message="Field required")],
-                          render_kw={"class":"form-select"})
+    subject = StringField("Subject",validators=[InputRequired(message="Field required")],
+                            render_kw={"class":"form-control form-select", "placeholder":"Enter subject"})
     
     school = StringField("School", validators = [InputRequired(message="Field required")],
-                            render_kw={"class": "form-control", "placeholder":"Enter school"})
+                            render_kw={"class": "form-control form-select ", "placeholder":"Enter school"})
     
     term = SelectField("Term", 
                        choices=[("", "--Select school term"), ("KNEC", "KNEC"), ("One", "One"), ("Two", "Two"), ("Three", "Three")],
