@@ -12,8 +12,11 @@ ENV PATH="/app/venv/bin:$PATH"
 # Install necessary system dependencies
 RUN apt-get update && apt-get install -y \
     tesseract-ocr \
+    tesseract-ocr-eng \
     libtesseract-dev \
     && apt-get clean
+
+ENV TESSDATA_PREFIX="/usr/share/tesseract-ocr/4.00/tessdata/"
 
 # Install dependencies.
 RUN pip install --no-cache-dir -q -r requirements.txt

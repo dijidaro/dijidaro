@@ -1,4 +1,4 @@
-from flask import Blueprint, current_app, render_template, flash, g, send_from_directory
+from flask import Blueprint, current_app, render_template, flash, g, send_from_directory, url_for, redirect
 from forms import UploadForm
 from werkzeug.utils import secure_filename
 import os
@@ -7,10 +7,9 @@ import pymupdf
 from io import BytesIO
 import time
 from datetime import datetime
-from models import Subject, School
+from models import Subject, School 
 
 bp = Blueprint("upload", __name__)
-os.environ['TESSDATA_PREFIX'] = '/usr/share/tesseract-ocr/4.00/tessdata/'
 
 @bp.route("/upload", methods=("GET", "POST"))
 @login_required
@@ -29,13 +28,14 @@ def upload_resource():
         "schools" : School().query.all()
     }
     if form.validate_on_submit():
-        error = None
+        error = None 
         try:
             resource = pymupdf.Document(stream=BytesIO(form.uploaded_resource.data.read()), filetype="pdf")
         except Exception as e:
             return f"Error reading file. {e}"
                
         form_data = {
+            "category" : form.resource.data,
             "subject" : form.subject.data,
             "school" : form.school.data,
             "term" : form.term.data,
@@ -52,7 +52,6 @@ def upload_resource():
             resource_pix = resource_first_page.get_pixmap()
             resource_thumb_name = secure_filename(f"{form_data['school']}_{form_data['subject'][:4]}_term_{form_data['term']}_{form_data['year']}.jpeg").lower()
             resource_thumb_path = os.path.join(uploads_folder, resource_thumb_name)
-            form_data["category"] = form.resource.data
             form_data["resource_name"] = resource_name
             form_data["resource_url"] = resource_path
             form_data["thumbnail"] = resource_thumb_name
@@ -64,7 +63,7 @@ def upload_resource():
             resource.close()
             end_time = time.time()
             execution_time = end_time - start_time
-            return render_template("explore.html", text=resource_text, form_data=form_data, duration=str(format(execution_time, '.2f')))
+            return redirect(url_for('explore.explore_resources'))
         flash(error)
     return render_template("upload.html", form=form, data=data_list)
 
@@ -88,10 +87,9 @@ def is_valid_resource(form_data_dict, text, missing_values):
     return True
 
 def extract_resource_text(page):
-    partial_text_page = page.get_textpage_ocr(flags=0, language="eng", dpi=72, tessdata=os.environ['TESSDATA_PREFIX'], full=False)
+    partial_text_page = page.get_textpage_ocr(flags=0, language="eng", dpi=72, tessdata=os.environ.get("TESSDATA_PREFIX"), full=False)
     page_text = page.get_text(textpage=partial_text_page, sort=True).strip()
     return page_text
-
 
 
 

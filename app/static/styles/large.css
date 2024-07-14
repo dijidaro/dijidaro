@@ -2,10 +2,10 @@
 
     /* HEADER SECTION */
     .hamburger, .close { display: none; }
-    header { background-color: var(--brand-color); }
-    header .navigation {
+    .navigation {
+        background-color: var(--brand-color);
         height: 50px;
-        max-width: 992px;
+        /* max-width: 992px; */
         margin: 0 auto;
     }
     nav {
@@ -16,6 +16,7 @@
         width: auto;
         background: transparent;
     }
+
     nav ul {
         flex-flow: row nowrap;
         justify-content: center;

@@ -53,7 +53,7 @@ class UploadForm(FlaskForm):
     resource = SelectField("Resource Name",
                            choices=[("","--Please choose an option--"), ("kcse", "Kenya Certificate of Secondary Education (KCSE)"), 
                                     ("kcpe", "Kenya Certificate of Primary Education (KCPE)"), ("mock", "Mock Exam"), 
-                                    ("End Term", "End Term"), ("cat", "Continous Assessment Test (CAT)")], 
+                                    ("Term 1", "End Term 1"),("Term 2", "End Term 2"),("Term 3", "End Term 3"), ("cat", "Continous Assessment Test (CAT)")], 
                             validators=[InputRequired(message="Field required")],
                             render_kw={"class":"form-select"})
     
@@ -64,14 +64,14 @@ class UploadForm(FlaskForm):
                             render_kw={"class": "form-control form-select ", "placeholder":"Enter school"})
     
     term = SelectField("Term", 
-                       choices=[("", "--Select school term"), ("KNEC", "KNEC"), ("One", "One"), ("Two", "Two"), ("Three", "Three")],
+                       choices=[("", "--Select school term"), ("KNEC", "KNEC"),("mock", "MOCK"), ("One", "One"), ("Two", "Two"), ("Three", "Three")],
                        validators=[InputRequired(message="Field required")], 
                        render_kw={"class":"form-select"})
     
     year = IntegerField("Year (e.g 1991)", 
                         validators = [
                             InputRequired(message="Field required"),
-                            NumberRange(min=1985, max=datetime.datetime.now().year, message="Invalid year.")             
+                            NumberRange(min=1985, max=datetime.datetime.now() .year, message="Invalid year.")             
                             ],
                             render_kw={"class":"form-control", "placeholder":"Enter year"})
     

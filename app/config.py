@@ -20,6 +20,9 @@ def create_app():
     if not os.path.exists(app.config["UPLOAD_FOLDER"]):
         os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
     
+    import about
+    app.register_blueprint(about.bp)
+
     import explore
     app.register_blueprint(explore.bp)
     
