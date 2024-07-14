@@ -91,7 +91,7 @@ def is_valid_resource(form_data_dict, text, missing_values):
 
 def extract_resource_text(page):
     try:
-        tessdata_prefix = "/usr/share/tesseract-ocr/4.00/tessdata/"
+        tessdata_prefix = "/usr/share/tesseract-ocr/5/tessdata/"
         print(tessdata_prefix)
         partial_text_page = page.get_textpage_ocr(flags=0, dpi=72, tessdata=tessdata_prefix, full=False)
         page_text = page.get_text(textpage=partial_text_page, sort=True).strip()
