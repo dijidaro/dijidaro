@@ -16,8 +16,6 @@ RUN apt-get update && apt-get install -y \
     libtesseract-dev \
     && apt-get clean
 
-ENV TESSDATA_PREFIX="/usr/share/tesseract-ocr/4.00/tessdata/"
-
 # Install dependencies.
 RUN pip install --no-cache-dir -q -r requirements.txt
 
@@ -26,6 +24,5 @@ COPY /app .
 # Defines environment variables
 ENV FLASK_APP=app.py
 ENV FLASK_DEBUG=True
-ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata/
 
 CMD ["python", "app.py"]
