@@ -10,11 +10,7 @@ RUN python3 -m venv /venv
 ENV PATH="/app/venv/bin:$PATH"
 
 # Install necessary system dependencies
-RUN apt-get update && apt-get install -y \
-    tesseract-ocr \
-    tesseract-ocr-eng \
-    libtesseract-dev \
-    && apt-get clean
+RUN apt-get update && apt-get install -y tesseract-ocr
 
 # Install dependencies.
 RUN pip install --no-cache-dir -q -r requirements.txt

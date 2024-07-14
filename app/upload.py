@@ -44,26 +44,29 @@ def upload_resource():
         missing_form_data = {}
         resource_first_page = resource[0]
         resource_text = extract_resource_text(resource_first_page)
-        if not is_valid_resource(form_data, resource_text, missing_form_data):
-            error = f"The contents of the uploaded file do not match the information provided in the form. Please ensure that the file content correctly reflects the form data."
-        if error is None:
-            resource_name = secure_filename(f"{form_data['school']}_{form_data['subject'][:4]}_term_{form_data['term']}_{form_data['year']}.pdf").lower()
-            resource_path = os.path.join(uploads_folder, resource_name)
-            resource_pix = resource_first_page.get_pixmap()
-            resource_thumb_name = secure_filename(f"{form_data['school']}_{form_data['subject'][:4]}_term_{form_data['term']}_{form_data['year']}.jpeg").lower()
-            resource_thumb_path = os.path.join(uploads_folder, resource_thumb_name)
-            form_data["resource_name"] = resource_name
-            form_data["resource_url"] = resource_path
-            form_data["thumbnail"] = resource_thumb_name
-            form_data["thumbnail_url"] = resource_thumb_path
-            form_data["uploaded_by"] = g.user.username
-            form_data["date_uploaded"] = datetime.now()
-            resource_pix.save(resource_thumb_path, output=None, jpg_quality=95)
-            resource.save(resource_path)
-            resource.close()
-            end_time = time.time()
-            execution_time = end_time - start_time
-            return redirect(url_for('explore.explore_resources'))
+        if resource_text is not None:
+            if not is_valid_resource(form_data, resource_text, missing_form_data):
+                error = f"The contents of the uploaded file do not match the information provided in the form. Please ensure that the file content correctly reflects the form data."
+            if error is None:
+                resource_name = secure_filename(f"{form_data['school']}_{form_data['subject'][:4]}_term_{form_data['term']}_{form_data['year']}.pdf").lower()
+                resource_path = os.path.join(uploads_folder, resource_name)
+                resource_pix = resource_first_page.get_pixmap()
+                resource_thumb_name = secure_filename(f"{form_data['school']}_{form_data['subject'][:4]}_term_{form_data['term']}_{form_data['year']}.jpeg").lower()
+                resource_thumb_path = os.path.join(uploads_folder, resource_thumb_name)
+                form_data["resource_name"] = resource_name
+                form_data["resource_url"] = resource_path
+                form_data["thumbnail"] = resource_thumb_name
+                form_data["thumbnail_url"] = resource_thumb_path
+                form_data["uploaded_by"] = g.user.username
+                form_data["date_uploaded"] = datetime.now()
+                resource_pix.save(resource_thumb_path, output=None, jpg_quality=95)
+                resource.save(resource_path)
+                resource.close()
+                end_time = time.time()
+                execution_time = end_time - start_time
+                return redirect(url_for('explore.explore_resources'))
+            flash(error)
+        error = "Unable to extract text"
         flash(error)
     return render_template("upload.html", form=form, data=data_list)
 
