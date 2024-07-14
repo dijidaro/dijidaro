@@ -1,20 +1,23 @@
 {% extends "base.html" %}
-{% block title %} Explore {% endblock %}
+{% block header %}
+<header><h1>{% block title %} Explore {% endblock %}</h1></header>
+{% endblock %}
 {% block body %}
-    <h1>Uploaded files</h1>
-    <h2>Page Text Data</h2>
     {% if text %}
+        <h2>Page Text Data</h2>
         <p>{{ text }}</p>
     {% endif %}
-    <h2>Preview</h2>
-    <button class="btn btn-secondary">
-        <a href="{{ url_for('upload.download_file', filename=form_data['resource_name']) }}" download>Download file</a>
-    </button> <br>
-    <img class="border" src="{{ url_for('upload.uploaded_file', filename=form_data['thumbnail']) }}" alt="{{ form_data['resource_name'] }}" width="150" >
-    <ul>
-        {% for key, value in form_data.items() %}
-        <li>{{ key.upper() }}: {{ value }}</li>
-        {% endfor %}
-    </ul>
-    <p>Time used: {{ duration }} seconds</p>
+    {% if form_data %}
+        <h2>Preview</h2>
+        <button class="btn btn-secondary">
+            <a href="{{ url_for('upload.download_file', filename=form_data['resource_name']) }}" download>Download file</a>
+        </button> <br>
+        <img class="border" src="{{ url_for('upload.uploaded_file', filename=form_data['thumbnail']) }}" alt="{{ form_data['resource_name'] }}" width="150" >
+        <ul>
+            {% for key, value in form_data.items() %}
+            <li>{{ key.upper() }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+        <p>Time used: {{ duration }} seconds</p>
+    {% endif %}
 {% endblock %}
