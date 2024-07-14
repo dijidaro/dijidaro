@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 
 # Configure and activate virtual environment.
 RUN python -m venv venv
-# ENV PATH="/app/venv/bin:$PATH"
+ENV PATH="/app/venv/bin:$PATH"
 RUN source venv/bin/activate
 ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/5/tessdata/
 
