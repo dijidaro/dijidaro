@@ -87,7 +87,7 @@ def is_valid_resource(form_data_dict, text, missing_values):
     return True
 
 def extract_resource_text(page):
-    partial_text_page = page.get_textpage_ocr(flags=0, language="eng", dpi=72, tessdata=os.environ.get("TESSDATA_PREFIX"), full=False)
+    partial_text_page = page.get_textpage_ocr(flags=0, language="eng", dpi=72, tessdata=current_app.config["TESSDATA_PREFIX"], full=False)
     page_text = page.get_text(textpage=partial_text_page, sort=True).strip()
     return page_text
 
