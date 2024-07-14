@@ -5,12 +5,20 @@ WORKDIR /user/src/app
 
 COPY ./requirements.txt .
 
-# Configure and activate virtual environment.
-RUN python3 -m venv /venv
-ENV PATH="/app/venv/bin:$PATH"
-
 # Install necessary system dependencies
-RUN apt-get update && apt-get install -y tesseract-ocr
+RUN apt-get update && apt-get install -y \
+    apt-utils \
+    tesseract-ocr \
+    tesseract-ocr-eng \
+    libtesseract-dev \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Configure and activate virtual environment.
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata/
+
 
 # Install dependencies.
 RUN pip install --no-cache-dir -q -r requirements.txt
