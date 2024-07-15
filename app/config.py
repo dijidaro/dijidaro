@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
+from errors import register_error_handlers
 
 csrf = CSRFProtect()
 
@@ -21,6 +22,8 @@ def create_app():
     if not os.path.exists(app.config["UPLOAD_FOLDER"]):
         os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
     
+    register_error_handlers(app)
+
     import about
     app.register_blueprint(about.bp)
 
