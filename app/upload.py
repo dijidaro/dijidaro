@@ -38,6 +38,7 @@ def upload_resource():
             "category" : form.resource.data,
             "subject" : form.subject.data,
             "school" : form.school.data,
+            "level": form.level.data,
             "term" : form.term.data,
             "year" : form.year.data,
         }
@@ -93,7 +94,7 @@ def extract_resource_text(page):
     try:
         tessdata_prefix = "/usr/share/tesseract-ocr/5/tessdata/"
         print(tessdata_prefix)
-        partial_text_page = page.get_textpage_ocr(flags=0, dpi=72, tessdata=tessdata_prefix, full=False)
+        partial_text_page = page.get_textpage_ocr(flags=0, dpi=72, language="eng", tessdata=tessdata_prefix, full=False)
         page_text = page.get_text(textpage=partial_text_page, sort=True).strip()
         return page_text
     except Exception as e:

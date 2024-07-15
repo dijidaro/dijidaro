@@ -49,6 +49,17 @@
                         {% endif %}
                     </div>
                     <div class="mb-3">
+                        {{ form.level.label(class="form-label")}}
+                        {{ form.level }}
+                        {% if form.level.errors %}
+                            <ul class="error">
+                                {% for error in form.level.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
                         {{ form.term.label(class="form-label")}}
                         {{ form.term }}
                         {% if form.term.errors %}
