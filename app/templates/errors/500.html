@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block css %} <link rel="stylesheet" href="{{ url_for('static', filename='styles/errors.css') }}"> {% endblock %}
+
+{% block header %}
+<header><h1>{% block title %} Oops! Something Went Wrong {% endblock %}
+{% endblock %}
+{% block body %}
+<p>We're sorry, but something went wrong on our end.
+<p>Please try again later. If the problem persists, you can <a href="#">contact us</a> and we'll look into it.
+<p>If you believe this is an error, please <a href="#">contact us.
+<p><a href="/">Return to Home Page
+{% endblock %}

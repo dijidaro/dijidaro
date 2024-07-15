@@ -51,9 +51,10 @@ class DeleteForm(FlaskForm):
 class UploadForm(FlaskForm):
     current_year = datetime.datetime.now().year
     resource = SelectField("Resource Name",
-                           choices=[("","--Please choose an option--"), ("kcse", "Kenya Certificate of Secondary Education (KCSE)"), 
+                           choices=[("","-- Please choose an option"), ("kcse", "Kenya Certificate of Secondary Education (KCSE)"), 
                                     ("kcpe", "Kenya Certificate of Primary Education (KCPE)"), ("mock", "Mock Exam"), 
-                                    ("Term 1", "End Term 1"),("Term 2", "End Term 2"),("Term 3", "End Term 3"), ("cat", "Continous Assessment Test (CAT)")], 
+                                    ("Term 1", "End Term 1"),("Term 2", "End Term 2"),("Term 3", "End Term 3"),
+                                      ("cat", "Continous Assessment Test (CAT)"), ("holiday", "HOLIDAY ASSIGNMENT")], 
                             validators=[InputRequired(message="Field required")],
                             render_kw={"class":"form-select"})
     
@@ -63,8 +64,13 @@ class UploadForm(FlaskForm):
     school = StringField("School", validators = [InputRequired(message="Field required")],
                             render_kw={"class": "form-control form-select ", "placeholder":"Enter school"})
     
+    level = SelectField("Level/Class", 
+                        choices=[("", "-- Select level"), ("form 1", "FORM 1"), ("form 2", "FORM 2"), ("form 3", "FORM 3"), ("form 4", "FORM 4"), ("kcse", "KCSE")],
+                        validators=[InputRequired(message="Field required")],
+                        render_kw={"class":"form-select"})
+    
     term = SelectField("Term", 
-                       choices=[("", "--Select school term"), ("KNEC", "KNEC"),("mock", "MOCK"), ("One", "One"), ("Two", "Two"), ("Three", "Three")],
+                       choices=[("", "-- Select school term"), ("1", "One"), ("2", "Two"), ("3", "Three"), ("KCSE", "KCSE"),("mock", "MOCK")],
                        validators=[InputRequired(message="Field required")], 
                        render_kw={"class":"form-select"})
     
