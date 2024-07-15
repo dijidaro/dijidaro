@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block css %} <link rel="stylesheet" href="{{ url_for('static', filename='styles/errors.css') }}"> {% endblock %}
+
+{% block header %}
+<header><h1>{% block title %} Oops! Page Not Found{% endblock %}
+{% endblock %}
+{% block body %}
+<p>We're sorry, but the page you are looking for doesn't exist.
+<p>It might have been moved or deleted. Please check the URL and try again.
+<p>If you believe this is an error, please <a href="/contact">contact us.
+<p><a href="/">Return to Home Page
+{% endblock %}
