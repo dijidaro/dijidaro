@@ -3,6 +3,7 @@ from flask import Flask
 from flask_wtf.csrf import CSRFProtect
 from errors import register_error_handlers
 from models import db
+from flask_session import Session
 
 csrf = CSRFProtect()
 
@@ -27,7 +28,9 @@ def create_app(config_class=None):
             "SQLALCHEMY_DATABASE_URI" : os.environ.get("DATABASE_URL").replace("://", "ql://", 1),
             "SQLALCHEMY_TRACK_MODIFICATIONS" : False,
             "TESSDATA_PREFIX" : os.environ.get("TESSDATA_PREFIX"),
-            "UPLOAD_FOLDER" : os.path.join(os.path.dirname(__file__), "uploads")
+            "UPLOAD_FOLDER" : os.path.join(os.path.dirname(__file__), "uploads"),
+            "SESSION_PERMANENT" : False,
+            "SESSION_TYPE" : "filesystem"
         })
     
     app.add_url_rule("/uploads/<name>", endpoint="download_file", build_only=True)
@@ -36,6 +39,9 @@ def create_app(config_class=None):
     
     # Initialize database.
     db.init_app(app)
+
+    # Initialize session.
+    Session(app)
 
     # Set up CSRF protection.
     csrf.init_app(app)
