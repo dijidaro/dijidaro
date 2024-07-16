@@ -28,8 +28,9 @@ def upload_resource():
         "subjects" : Subject().query.all(),
         "schools" : School().query.all()
     }
+
     if form.validate_on_submit():
-        error = None 
+        error = None
         try:
             resource = pymupdf.Document(stream=BytesIO(form.uploaded_resource.data.read()), filetype="pdf")
         except Exception as e:
@@ -44,6 +45,7 @@ def upload_resource():
             "term" : form.term.data,
             "year" : form.year.data,
         }
+        
         missing_form_data = {}
         resource_first_page = resource[0]
         resource_text = extract_resource_text(resource_first_page)

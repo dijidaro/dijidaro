@@ -2,28 +2,48 @@ import os
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
 from errors import register_error_handlers
+from models import db
 
 csrf = CSRFProtect()
 
-def create_app():
+# Setup testing.
+class TestingConfig:
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = 'test_secret_key'
+    UPLOAD_FOLDER = '/tmp/uploads'
+
+def create_app(config_class=None):
     # Create and configure app.
     app = Flask(__name__, instance_relative_config=True)
 
-    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
-    csrf.init_app(app)
-    # app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL").replace("://", "ql://", 1)
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    app.config["TESSDATA_PREFIX"] = os.environ.get("TESSDATA_PREFIX")
+    if config_class:
+        app.config.from_object(config_class)
+    else:
+        app.config.from_mapping({
+            # Set configuration variables.
+            "SECRET_KEY" : os.environ.get("SECRET_KEY"),
+            "SQLALCHEMY_DATABASE_URI" : os.environ.get("DATABASE_URL").replace("://", "ql://", 1),
+            "SQLALCHEMY_TRACK_MODIFICATIONS" : False,
+            "TESSDATA_PREFIX" : os.environ.get("TESSDATA_PREFIX"),
+            "UPLOAD_FOLDER" : os.path.join(os.path.dirname(__file__), "uploads")
+        })
     
-    # Setup upload folder
-    app.config["UPLOAD_FOLDER"] = os.path.join(os.path.dirname(__file__), "uploads")
     app.add_url_rule("/uploads/<name>", endpoint="download_file", build_only=True)
     if not os.path.exists(app.config["UPLOAD_FOLDER"]):
         os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
     
+    # Initialize database.
+    db.init_app(app)
+
+    # Set up CSRF protection.
+    csrf.init_app(app)
+
+    # Register error handlers.
     register_error_handlers(app)
 
+    # Register blueprints.
     import about
     app.register_blueprint(about.bp)
 
