@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'roboto_condensedbold';
+    src: url('../fonts/robotocondensed-bold-webfont.woff2') format('woff2'),
+         url('../fonts/robotocondensed-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'source_sans_probold';
+    src: url('../fonts/sourcesanspro-bold-webfont.woff2') format('woff2'),
+         url('../fonts/sourcesanspro-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'source_sans_proregular';
+    src: url('../fonts/sourcesanspro-regular-webfont.woff2') format('woff2'),
+         url('../fonts/sourcesanspro-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+:root {
+    --brand-color: #2b7ddb;
+    --brand-color2: #1e74d6;
+    --text-color-dark: #2C2C2C;
+    --text-color-light: #faf9f1;
+    --light: #f2f2f2;
+    --light-shade: #d9d9d9;
+    --dark: #575e75;
+    --dark-light: #929597;
+    --primary-color: #0d91b7;
+    --secondary-color: #f2a807;
+}
+
+* { font-size: 16px; font-family: 'source_sans_proregular', serif; color: var(--text-color-dark); }
+html, body { height: 100%; }
+
+/* HEADINGS */
+h1,h2,h3,h4,h5,h6 { font-family: 'roboto_condensedbold', sans-serif; }
+
+/* LINKS */
+/* BUTTONS */
