@@ -5,12 +5,14 @@ Dijidaro is an open-source platform designed to make learning resources accessib
 Our mission is to bridge the gap between resources and knowledge sharing. Educators and parents can contribute by uploading valuable teaching resources, fostering an inclusive and supportive environment for education.
 
 ## Key Features
+
  - Access to diverse learning materials from various institions.
  - Free resources for students, educators and parents.
  - Upload function for educators and parents to share teaching materials.
  - Community-driven platform for equal learning opportunities.
 
 ## Technology Stack
+
  - **Backend**: Python (Flask)
  - **Database**: PostgreSQL
  - **Frontend**: React
@@ -18,6 +20,7 @@ Our mission is to bridge the gap between resources and knowledge sharing. Educat
 ## Getting Started
 
 ### Prerequisites
+
 Before you begin, ensure you have the following installed:
 
  - [Python 3.8+](https://www.python.org/downloads/)
@@ -41,6 +44,7 @@ Before you begin, ensure you have the following installed:
 `pip install -r requirements.txt`
 
 **4. Set Up PostgreSQL Database**
+
  - Create a new PostgreSQL database:
 
     `CREATE DATABSE dijidaro`;
@@ -48,7 +52,8 @@ Before you begin, ensure you have the following installed:
  - Set up a PostgreSQL user with appropriate privileges and note the connection details.
 
 **5. Configure Environment Variables**
-Create a *.env* file in the project root and set the database connection URL:
+
+Create a `.env` file in the project root and set the database connection URL:
 
 `DATABASE_URL=postgresql://username:password@localhost:5432/dijidaro`;
 
@@ -65,6 +70,7 @@ Create a *.env* file in the project root and set the database connection URL:
  Your app will be available at [http://localhost:5000](http://localhost:5000).
 
 ## Contribution Guide
+
 We welcome contributions from the community! To contribute:
 
  - Fork the repository and create a new branch.
@@ -72,4 +78,5 @@ We welcome contributions from the community! To contribute:
  - For more details, see [CONTRIBUTING.md]("https://www.dijidaro.com").
  
 ## License
+
 This project is licensed under the MIT License - see the [LICENSE]("https://www.dijidaro.com") file for details.
