@@ -1,1 +1,1 @@
-## Free and Open Source revision materials repository.
+## Free revision materials repository for students, educators and parents.
