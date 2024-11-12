@@ -1,0 +1,38 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment directories
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Flask-specific files
+instance/
+*.db
+*.sqlite3
+*.log
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Distribution files
+*.egg
+*.egg-info
+dist/
+build/
+
+# PyCharm-specific
+*.iml
+
+# Jupyter Notebook files
+.ipynb_checkpoints/
