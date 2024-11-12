@@ -75,8 +75,8 @@ We welcome contributions from the community! To contribute:
 
  - Fork the repository and create a new branch.
  - Make your changes, then submit a pull request with a clear description.
- - For more details, see [CONTRIBUTING.md]("https://www.dijidaro.com").
+ - For more details, see [CONTRIBUTING.md](.github/CONTRIBUTING.md).
  
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE]("https://www.dijidaro.com") file for details.
+This project is licensed under the MIT License - see the [LICENSE](/LICENSE.md) file for details.
