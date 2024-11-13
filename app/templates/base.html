@@ -19,8 +19,8 @@
             </a>
             <nav id="navbar">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Explore</a></li>
+                    <li><a href="{{ url_for('home.index') }}">Home</a></li>
+                    <li><a href="{{ url_for('explore.explore_resources') }}">Explore</a></li>
                     <li><a href="#">Upload</a></li>
                     <li>
                         <form action="" role="search">

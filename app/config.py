@@ -12,4 +12,7 @@ def create_app():
     from routes.home import home_bp
     app.register_blueprint(home_bp)
 
+    from routes.explore import explore_bp
+    app.register_blueprint(explore_bp)
+
     return app
