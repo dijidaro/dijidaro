@@ -12,7 +12,7 @@
 <body>
     <header>
         <div class="navigation px-2" >
-            <a href="#"><img class="#" src="../static/images/logo3.png" alt="dijidaro logo" height="35"></a>
+            <a href="{{ url_for('home.index') }}"><img class="#" src="../static/images/logo3.png" alt="dijidaro logo" height="35"></a>
             <a class="hamburger" href="#navbar" aria-label="Open navigation panel.">
                 <span class="visually-hidden">Open navigation panel</span>
                 <i class="fa-solid fa-bars" aria-hidden="true"></i>
@@ -21,14 +21,14 @@
                 <ul>
                     <li><a href="{{ url_for('home.index') }}">Home</a></li>
                     <li><a href="{{ url_for('explore.explore_resources') }}">Explore</a></li>
-                    <li><a href="#">Upload</a></li>
+                    <li><a href="{{ url_for('upload.upload_resource' )}}">Upload</a></li>
                     <li>
                         <form action="" role="search">
                             <input class="form-control" type="search" name="search" id="" placeholder="Search..." aria-label="Search">
                         </form>
                     </li>
-                    <li><a href="#">Join&nbsp;dijidaro</a></li>
-                    <li><a href="#">Login</a></li>
+                    <li><a href="{{ url_for('auth.register_user' )}}">Join&nbsp;dijidaro</a></li>
+                    <li><a href="{{ url_for('auth.login_user' )}}">Login</a></li>
                 </ul>
                 <a href="#" class="close" aria-label="Close navigation panel">
                     <span class="visually-hidden">Close navigation panel</span>
