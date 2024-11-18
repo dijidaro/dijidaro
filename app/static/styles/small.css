@@ -146,3 +146,29 @@ nav input[type=search] {
     color: var(--brand-color2);
 }
 
+/* INFO SECTION */
+.info {
+    background-color: var(--light);
+}
+
+
+.info-btn {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.info button {
+    background-color: var(--brand-color);
+    color: var(--text-color-light);
+    border-radius: 25px;
+    font-size: .875rem;
+    padding: 7px 25px;
+    margin: 5px;
+    border: none;
+}
+
+.info button:hover {
+    background-color: var(--brand-color2);
+}
