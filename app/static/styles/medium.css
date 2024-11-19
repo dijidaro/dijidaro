@@ -34,20 +34,24 @@
 
     nav a {
         text-decoration: none;
-        font-size: 1rem;
-        font-weight: 600;
-        padding: 10px;
+        font-size: .95rem;
+        font-weight: 500;
+        padding: 12px;
         /* margin: 0; */
     }
     nav a:hover {
         background-color: var(--brand-color2);
     }
 
+    .router-link.active {
+        background-color: var(--brand-color2);
+        border-bottom: 2px solid var(--light-shade);
+    }
+
     nav input[type=search] {
         background-color: var(--brand-color2);
         color: var(--text-color-light);
-        border-bottom: 2px solid var(--light-shade);
-        width: 350px;
+        width: 30vw;
     }
     nav input[type=search]:focus {
         background-color: var(--brand-color2);
@@ -57,6 +61,17 @@
         color: var(--text-color-light);
         opacity: .6;
         font-size: .95rem;
+    }
+
+/* HERO SECTION */
+    .hero {
+        min-height: 25vh;
+        align-items: flex-start;
+    }
+
+    .hero button {
+        width: fit-content;
+        padding: 10px 35px;
     }
 
 }
