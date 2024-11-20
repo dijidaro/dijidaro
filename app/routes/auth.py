@@ -1,8 +1,8 @@
-from flask import Blueprint, flash, redirect, render_template, url_for
-from forms import UserRegistrationForm
+from flask import Blueprint, flash, redirect, render_template, session, url_for
+from forms import UserRegistrationForm, UserLoginForm
 import re
 from models import User, db
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.exc import IntegrityError
 
 
@@ -39,11 +39,30 @@ def register_user():
 
 @auth_bp.route("/user_login", methods=["GET", "POST"])
 def login_user():
-    return render_template("pages/auth/login.html")
+    form = UserLoginForm()
+    if form.validate_on_submit():
+        error = None
+        errorMessage = "The information you entered does not match our records for accessing this service. You either entered an invalid email and/or password or you do not have privilege to access this service. Please try to enter your email and password again!"
+        user = User.query.filter_by(username=form.username.data).all()
+        print(user)
+        if not user:
+            error = errorMessage
+
+        for row in user:
+            if not check_password_hash(row.password, form.password.data):
+                error = errorMessage
+            if error is None:
+                session.clear()
+                session["user_id"] = row.id
+                flash(f"Logged in as {row.username}")
+                return redirect(url_for("home.index"))
+            flash(error)
+    return render_template("pages/auth/login.html", form=form)
+
+
 
 
 # HELPER FUNCTIONS
-
 def validate_username(username):
     """ Ensures min/max number of characters.Checks that username doesn't 
     begin with numbers and no special characters. Returns `True` if the 

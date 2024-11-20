@@ -5,5 +5,16 @@
 {% endblock %}
 
 {% block body %}
-    <p>Please wait...</p>
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <div>
+            {{ form.username }}
+        </div>
+        <div>
+            {{ form.password }}
+        </div>
+        <div>
+            {{ form.submit }}
+        </div>
+    </form>
 {% endblock %}

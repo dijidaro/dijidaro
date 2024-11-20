@@ -43,3 +43,13 @@ class UserRegistrationForm(FlaskForm):
                               render_kw={"class": "form-control", "placeholder": "Repeat password"})
     
     submit = SubmitField("Register", render_kw={"class": "btn btn-primary col-12" })
+
+class UserLoginForm(FlaskForm):
+    username = StringField("Username", 
+                           validators=[InputRequired(message="Username required")], 
+                           render_kw={"class": "form-control", "placeholder": "Enter username"})
+    
+    password = PasswordField("Password", 
+                             validators=[InputRequired(message="Password required")], 
+                             render_kw={"class": "form-control", "placeholder": "Enter password"})
+    submit = SubmitField("Login", render_kw={"class": "btn btn-primary col-12"})
