@@ -1,4 +1,5 @@
-from flask import Blueprint, flash, redirect, render_template, session, url_for
+import functools
+from flask import Blueprint, flash, redirect, render_template, session, url_for, g
 from forms import UserRegistrationForm, UserLoginForm
 import re
 from models import User, db
@@ -58,6 +59,29 @@ def login_user():
                 return redirect(url_for("home.index"))
             flash(error)
     return render_template("pages/auth/login.html", form=form)
+
+# Log user out
+@auth_bp.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("home.index"))
+
+@auth_bp.before_app_request
+def load_logged_in_user():
+    user_id = session.get("user_id")
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = User.query.get(user_id)
+
+# Require athentication in other views.
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for("auth.login"))
+        return view(**kwargs)
+    return wrapped_view
 
 
 
