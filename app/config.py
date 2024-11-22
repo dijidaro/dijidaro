@@ -1,6 +1,8 @@
 import os
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
+from error_handlers import init_error_handlers
+from loggin_config import configure_logging
 
 csrf=CSRFProtect()
 
@@ -13,6 +15,12 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL") or "postgresql://postgres:jagoro1991@localhost:5432/postgres"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+    # Configure Logging
+    configure_logging(app)
+    
+    # Initializee Error Handlers
+    init_error_handlers(app)
+    
     from routes.home import home_bp
     app.register_blueprint(home_bp)
     app.add_url_rule("/", endpoint="home")
