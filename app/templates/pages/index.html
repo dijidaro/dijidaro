@@ -20,7 +20,8 @@
         {% if users %}
             <ul>
             {% for user in users %}
-                <li>{{ user.username }}</li>
+                <li>{{ user.username }} <a class="btn btn-danger" href="{{ url_for('auth.delete_user', user_id=user.id) }}">
+                X</a></li>
             {% endfor %}
             </ul>
         {% else %}

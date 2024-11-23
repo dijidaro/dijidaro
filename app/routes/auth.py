@@ -1,13 +1,20 @@
 import functools
 from flask import Blueprint, flash, redirect, render_template, session, url_for, g
-from forms import UserRegistrationForm, UserLoginForm
+from app.forms import UserRegistrationForm, UserLoginForm
 import re
-from models import User, db
+from app.models import User, db
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.exc import IntegrityError
 
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
+
+# Constants for validation messages
+INVALID_USERNAME = "Invalid username. It must be 5-20 characters long, contain only letters, numbers, and underscores."
+INVALID_PASSWORD = "Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, one number, and one special character."
+PASSWORDS_MISMATCH = "Passwords must match."
+DUPLICATE_USER = "Username or email already exists."
+LOGIN_ERROR = "Invalid username or password."
 
 @auth_bp.route("/registration", methods=["GET", "POST"])
 def register_user():
@@ -15,11 +22,11 @@ def register_user():
     if form.validate_on_submit():
         error = None
         if not validate_username(form.username.data.lower()):
-            error = "Invalid username."
+            error = INVALID_USERNAME
         if not validate_password(form.password.data):
-            error = "Password must be at least 8 characters long, contains at least one uppercase letter, one lowercase letter, and one number."
-            if not form.password.data == form.password2.data:
-                error = "Passwords must match"
+            error = INVALID_PASSWORD
+            if form.password.data != form.password2.data:
+                error = PASSWORDS_MISMATCH
         
         if error is None:
             try:
@@ -29,13 +36,16 @@ def register_user():
                 db.session.add(user)
                 db.session.commit()
             except IntegrityError as e:
-                error = "Request failed! You either entered an already existing username and/or email"
+                error = DUPLICATE_USER
                 db.session.rollback()
                 flash(error)
                 print(e)
             else:
+                flash("Registration successful! Please log in.")
                 return redirect(url_for("auth.login_user"))
+        
         flash(error)
+
     return render_template("pages/auth/register.html", form=form)
 
 @auth_bp.route("/user_login", methods=["GET", "POST"])
@@ -43,21 +53,19 @@ def login_user():
     form = UserLoginForm()
     if form.validate_on_submit():
         error = None
-        errorMessage = "The information you entered does not match our records for accessing this service. You either entered an invalid email and/or password or you do not have privilege to access this service. Please try to enter your email and password again!"
-        user = User.query.filter_by(username=form.username.data).all()
+        user = User.query.filter_by(username=form.username.data).first()
         print(user)
-        if not user:
-            error = errorMessage
+        if not user or not check_password_hash(user.password, form.password.data):
+            error = LOGIN_ERROR
 
-        for row in user:
-            if not check_password_hash(row.password, form.password.data):
-                error = errorMessage
-            if error is None:
-                session.clear()
-                session["user_id"] = row.id
-                flash(f"Logged in as {row.username}")
-                return redirect(url_for("home.index"))
-            flash(error)
+        if error is None:
+            session.clear()
+            session["user_id"] = user.id
+            flash(f"Logged in as {user.username}")
+            return redirect(url_for("home.index"))
+        
+        flash(error)
+    
     return render_template("pages/auth/login.html", form=form)
 
 # Log user out
@@ -73,6 +81,14 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = User.query.get(user_id)
+
+@auth_bp.route("/delete/<int:user_id>", methods=("POST", "GET"))
+def delete_user(user_id):
+    user = User.query.get(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect(url_for("auth.login_user"))
+
 
 # Require athentication in other views.
 def login_required(view):
@@ -93,9 +109,7 @@ def validate_username(username):
     username matches the pattern and `False` otherwise.
     """
     pattern = r"[a-z0-9_]{5,20}$"
-    if re.match(pattern, username):
-        return True
-    # return False
+    return bool(re.match(pattern, username))
 
 def validate_password(password):
     """ Validates the password using the provided regular 
