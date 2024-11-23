@@ -43,17 +43,24 @@
 * { font-size: 16px; font-family: 'source_sans_proregular', serif; color: var(--text-color-dark); }
 html, body { height: 100%; }
 #container { max-width: 1920px; margin: 0 auto; }
+/* #main { background-color: var(--light-shade); } */
 
 /* HEADINGS */
 h1,h2,h3,h4,h5,h6 { font-family: 'roboto_condensedbold', sans-serif; }
 
 /* LINKS */
+a { color: var(--tertiary-color2) !important;}
+a:hover { text-decoration: none;}
 
 /* BUTTONS */
 .hamburger i, .close i { 
     color: var(--light);
     font-size: 1.75rem;
 }
+.btn-primary { background-color: var(--brand-color) !important;}
+.btn-primary:hover { background-color: var(--brand-color2) !important;}
+
+
 nav .bi, .uname, nav a span { color: var(--text-color-light); font-size: 2rem;}
 .close i {
     position: absolute;
@@ -102,7 +109,7 @@ nav a {
     display: block;
     text-decoration: underline;
     font-size: 2rem;
-    color: var(--text-color-light);
+    color: var(--text-color-light) !important;
     text-align: center;
     padding: 5px;
     margin-bottom: 10px;
@@ -122,6 +129,9 @@ nav input[type=search] {
 }
 .dropdown-menu span { color: var(--text-color-light);}
 
+#page-title { background-color: var(--primary-color);}
+#page-title h1 { font-size: 1.75rem; color: var(--text-color-light); padding: 10px; margin: 0; margin-left: 10px; }
+
 /* HERO SECTION */
 .hero {
     background-color: var(--brand-color);
@@ -131,7 +141,7 @@ nav input[type=search] {
     justify-content: center;
 }
 .hero h1 {
-    font-size: 1.5rem;
+    font-size: 1.5rem !important;
     color: var(--text-color-light);
     text-align: center;
     letter-spacing: .075rem;
@@ -145,12 +155,12 @@ nav input[type=search] {
     letter-spacing: .02rem;
     padding: 10px;
     font-weight: 600;
-    background-color: transparent;
+    background-color: transparent !important;
     border: 2px solid var(--text-color-light);
     color: var(--text-color-light);
 }
 .hero button:hover {
-    background-color: var(--text-color-light);
+    background-color: var(--text-color-light) !important;
     color: var(--brand-color2);
 }
 
@@ -180,3 +190,14 @@ nav input[type=search] {
 .info button:hover {
     background-color: var(--brand-color2);
 }
+
+/* FORMS */
+.auth-form {
+    /* border: 2px solid darkblue; */
+    max-width: 450px;
+    margin: 0 auto;
+    background-color: var(--light);
+}
+.auth-form h2 { font-size: 1.35rem;}
+.auth-form p { font-size: .895rem; line-height: 1.2;}
+

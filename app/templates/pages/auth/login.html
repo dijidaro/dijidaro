@@ -5,16 +5,39 @@
 {% endblock %}
 
 {% block body %}
+<div class="auth-form shadow-lg p-4 my-4">
+    <h2>Welcome</h2>
+    <p>Don't have an account? <a href="{{ url_for('auth.register_user') }}" class="link">
+        Sign Up
+    </a></p>
+    <hr class="mb-4">
     <form action="" method="post">
         {{ form.csrf_token }}
-        <div>
+        <div class="form-floating mb-3">
             {{ form.username }}
+            {{ form.username.label(class="form-label") }}
+            {% if form.username.errors %}
+            <ul class="form-error">
+                {% for error in form.username.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
-        <div>
+        <div class="form-floating mb-3">
             {{ form.password }}
+            {{ form.password.label(class="form-label") }}
+            {% if form.password.errors %}
+            <ul class="form-error">
+                {% for error in form.password.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
         <div>
             {{ form.submit }}
         </div>
     </form>
+</div>
 {% endblock %}

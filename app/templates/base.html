@@ -62,7 +62,9 @@
                 </a>
             </nav>
         </div>
-        {% block header %} {% endblock %}
+        <section id="page-title">
+            {% block header %} {% endblock %}
+        </section>
 
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -75,7 +77,7 @@
         {% endwith %}
     </header>
     <main>
-        <div id="main">
+        <div id="main" class="container">
             {% block body %} {% endblock %}
         </div>
     </main>
