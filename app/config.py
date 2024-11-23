@@ -2,7 +2,7 @@ import os
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
 from error_handlers import init_error_handlers
-from app.logging_config import configure_logging
+from logging_config import configure_logging
 
 csrf=CSRFProtect()
 

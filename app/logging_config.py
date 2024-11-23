@@ -2,6 +2,7 @@
 import os
 import logging
 from logging.handlers import RotatingFileHandler
+from flask import current_app as app
 
 def configure_logging(app):
     # Ensure logs directory exists
