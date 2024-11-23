@@ -4,6 +4,7 @@
 .hamburger i, .close i { 
     display: none;
 }
+nav .bi, .uname, nav a span { font-size: 1rem;}
 
 /* HEADER SECTION */
     .navigation {
@@ -14,14 +15,12 @@
         position: static;
         transform: translateX(0);
         background: none;
-        /* border: 3px solid slateblue; */
     }
     nav ul {
         width: auto;
         height: 50px;
         flex-direction: row;
         align-items: center;
-        /* flex-flow: row; */
         padding: 0;
         margin-left: 20px;
     }
@@ -37,7 +36,7 @@
         font-size: .95rem;
         font-weight: 500;
         padding: 12px;
-        /* margin: 0; */
+        margin-bottom: 0;
     }
     nav a:hover {
         background-color: var(--brand-color2);

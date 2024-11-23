@@ -16,4 +16,50 @@
             <button class="btn btn-primary">For Parents</button>
         </div>
     </section>
+    <section>
+        {% if users %}
+            <ul>
+            {% for user in users %}
+                <li>{{ user.username }} <a class="btn btn-danger" href="{{ url_for('auth.delete_user', user_id=user.id) }}">
+                X</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+        <p><em>No data.</em></p>
+        {% endif %}
+    </section>
+    <section>
+        <table>
+            <thead>
+                <tr>
+                    <th>FIRST NAME</th>
+                    <th>LAST NAME</th>
+                    <th>USERNAME</th>
+                    <th>EMAIL</th>
+                    <th>USER TYPE</th>
+                    <th>GENDER</th>
+                    <th>BIRTH DATE</th>
+                    <th>PASSWORD</th>
+                    <th>CREATED AT</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.user_type }}</td>
+                        <td>{{ user.gender }}</td>
+                        <td>{{ user.birth_date }}</td>
+                        <td>{{ user.password }}</td>
+                        <td>{{ user.created }}</td>
+                        <td>{{ user.status }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
 {% endblock %}

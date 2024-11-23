@@ -5,5 +5,50 @@
 {% endblock %}
 
 {% block body %}
-    <p>Form coming up...</p>
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <div>
+            {{ form.first_name }}
+        </div>
+        <div>
+            {{ form.last_name }}
+        </div>
+
+        <div>
+            {{ form.gender }}
+        </div>
+
+        <div>
+            {{ form.birth_date }}
+        </div>
+
+        <div>
+            {{ form.user_type }}
+        </div>
+
+        <div>
+            {{ form.email }}
+        </div>
+
+        <div>
+            {{ form.username }}
+        </div>
+
+        <div>
+            {{ form.password }}
+        </div>
+
+        <div>
+            {{ form.password2 }}
+        </div>
+
+        <div>
+            {{ form.submit }}
+        </div>
+    </form>
+        
+    <p>* &nbsp; Email addresses are not stored in a form that allows us to contact anyone.
+        Users will never receive emails from dijidaro except for password recovery.
+        See our <a href="#" class="link">privacy policy</a> for more information.
+    </p>
 {% endblock %}

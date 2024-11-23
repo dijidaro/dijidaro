@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block header %}
+    <h1>{% block title %} {{ error_code }} - Oops! Something went wrong {% endblock %}</h1>
+{% endblock %}
+{% block body %}
+    <p class="error-message">{{ error_message }}</p>
+    <div class="button-group">
+        <a href="{{ url_for('home.index') }}" class="btn">Go to Homepage</a>
+        <a href="/search" class="btn secondary">Search</a>
+    </div>
+{% endblock %}
