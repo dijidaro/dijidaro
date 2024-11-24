@@ -50,7 +50,7 @@ def create_app():
 
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
     csrf.init_app(app)
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL") or "postgresql://postgres:jagoro1991@localhost:5432/postgres"
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL").replace("://", "ql://", 1) or "postgresql://postgres:jagoro1991@localhost:5432/postgres"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     # Configure Logging
