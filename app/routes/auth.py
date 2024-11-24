@@ -1,8 +1,8 @@
 import functools
 from flask import Blueprint, flash, redirect, render_template, session, url_for, g
-from app.forms import UserRegistrationForm, UserLoginForm
+from forms import UserRegistrationForm, UserLoginForm
 import re
-from app.models import User, db
+from models import User, db
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.exc import IntegrityError
 
@@ -68,12 +68,6 @@ def login_user():
     
     return render_template("pages/auth/login.html", form=form)
 
-# Log user out
-@auth_bp.route("/logout")
-def logout():
-    session.clear()
-    return redirect(url_for("home.index"))
-
 @auth_bp.before_app_request
 def load_logged_in_user():
     user_id = session.get("user_id")
@@ -81,6 +75,14 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = User.query.get(user_id)
+
+
+# Log user out
+@auth_bp.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("home.index"))
+
 
 @auth_bp.route("/delete/<int:user_id>", methods=("POST", "GET"))
 def delete_user(user_id):
@@ -95,7 +97,7 @@ def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
-            return redirect(url_for("auth.login"))
+            return redirect(url_for("auth.login_user"))
         return view(**kwargs)
     return wrapped_view
 

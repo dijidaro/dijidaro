@@ -5,50 +5,130 @@
 {% endblock %}
 
 {% block body %}
-    <form action="" method="post">
-        {{ form.csrf_token }}
-        <div>
-            {{ form.first_name }}
-        </div>
-        <div>
-            {{ form.last_name }}
-        </div>
-
-        <div>
-            {{ form.gender }}
-        </div>
-
-        <div>
-            {{ form.birth_date }}
-        </div>
-
-        <div>
-            {{ form.user_type }}
-        </div>
-
-        <div>
-            {{ form.email }}
-        </div>
-
-        <div>
-            {{ form.username }}
-        </div>
-
-        <div>
-            {{ form.password }}
-        </div>
-
-        <div>
-            {{ form.password2 }}
-        </div>
-
-        <div>
-            {{ form.submit }}
-        </div>
-    </form>
-        
-    <p>* &nbsp; Email addresses are not stored in a form that allows us to contact anyone.
-        Users will never receive emails from dijidaro except for password recovery.
-        See our <a href="#" class="link">privacy policy</a> for more information.
-    </p>
+    <div class="auth-form shadow-lg p-4 my-4">
+        <h2>Create new account</h2>
+        <p>Sign up for a new account to manage your subjects. You can <a href="{{ url_for('home.index') }}" class="link">browse the various 
+            revision materials</a> without an account, but you will need to create a new one to save your revision materials.
+        </p>
+        <p>Already signed up? <a href="{{ url_for('auth.login_user') }}" class="link">Log in</a></p>
+        <hr class="mb-4">
+        <form action="" method="post">
+            {{ form.csrf_token }}
+            <div class="form-floating mb-3">
+                {{ form.first_name }}
+                {{ form.first_name.label(class="form-label") }}
+                {% if form.first_name.errors %}
+                <ul class="form-error">
+                    {% for error in first_name.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.last_name }}
+                {{ form.last_name.label(class="form-label") }}
+                {% if form.last_name.errors %}
+                <ul class="form-error">
+                    {% for error in last_name.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+    
+            <div class="form-floating mb-3">
+                {{ form.gender }}
+                {{ form.gender.label(class="form-label") }}
+                {% if form.gender.errors %}
+                <ul class="form-error">
+                    {% for error in gender.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+    
+            <div class="form-floating mb-3">
+                {{ form.birth_date }}
+                {{ form.birth_date.label(class="form-label") }}
+                {% if form.birth_date.errors %}
+                <ul class="form-error">
+                    {% for error in birth_date.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+    
+            <div class="form-floating mb-3">
+                {{ form.user_type }}
+                {{ form.user_type.label(class="form-label") }}
+                {% if form.user_type.errors %}
+                <ul class="form-error">
+                    {% for error in user_type.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+    
+            <div class="form-floating mb-3">
+                {{ form.email }}
+                {{ form.email.label(class="form-label") }}
+                {% if form.email.errors %}
+                <ul class="form-error">
+                    {% for error in email.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+    
+            <div class="form-floating mb-3">
+                {{ form.username }}
+                {{ form.username.label(class="form-label") }}
+                {% if form.username.errors %}
+                <ul class="form-error">
+                    {% for error in username.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+    
+            <div class="form-floating mb-3">
+                {{ form.password }}
+                {{ form.password.label(class="form-label") }}
+                {% if form.password.errors %}
+                <ul class="form-error">
+                    {% for error in password.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+    
+            <div class="form-floating mb-3">
+                {{ form.password2 }}
+                {{ form.password2.label(class="form-label") }}
+                {% if form.password2.errors %}
+                <ul class="form-error">
+                    {% for error in password2.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+    
+            <div class="mb-3">
+                {{ form.submit }}
+            </div>
+        </form>
+            
+        <p>* &nbsp; Email addresses are not stored in a form that allows us to contact anyone.
+            Users will never receive emails from dijidaro except for password recovery.
+            See our <a href="#" class="link">privacy policy</a> for more information.
+        </p>
+    </div>
 {% endblock %}

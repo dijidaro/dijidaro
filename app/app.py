@@ -1,6 +1,6 @@
 import os
-from app import create_app
-from app.models import db
+from config import create_app
+from models import db
 from flask_migrate import Migrate
 
 app = create_app()
@@ -11,8 +11,7 @@ db.init_app(app)
 # Set up Flask-Migrate for databas migrations
 migrate = Migrate(app, db)
 
-if app.config.get("ENV") == "development":
-    with app.app_context():
+with app.app_context():
         db.create_all()
 
 if __name__ == "__main__":

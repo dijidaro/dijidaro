@@ -9,7 +9,7 @@ def configure_logging(app):
     if not os.path.exists('logs'):
         os.makedirs('logs')
         
-    handler = RotatingFileHandler("error.log", maxBytes=10000, backupCount=5)
+    handler = RotatingFileHandler("logs/error.log", maxBytes=10000, backupCount=5)
     handler.setLevel(logging.ERROR)
     formatter = logging.Formatter(
         '[%(asctime)s] %(levelname)s in %(module)s: %(message)s'
