@@ -7,8 +7,9 @@
 nav .bi, .uname, nav a span { font-size: 1rem;}
 
 /* HEADER SECTION */
+
     .navigation {
-        justify-content: start;
+        justify-content: flex-start;
     }
 
     nav {
@@ -33,10 +34,11 @@ nav .bi, .uname, nav a span { font-size: 1rem;}
 
     nav a {
         text-decoration: none;
-        font-size: .95rem;
-        font-weight: 500;
-        padding: 12px;
+        font-size: .895rem;
+        font-weight: 600;
+        padding: 12px 15px;
         margin-bottom: 0;
+        cursor: pointer;
     }
     nav a:hover {
         background-color: var(--brand-color2);
@@ -50,7 +52,7 @@ nav .bi, .uname, nav a span { font-size: 1rem;}
     nav input[type=search] {
         background-color: var(--brand-color2);
         color: var(--text-color-light);
-        width: 30vw;
+        width: 20vw;
     }
     nav input[type=search]:focus {
         background-color: var(--brand-color2);
@@ -65,12 +67,12 @@ nav .bi, .uname, nav a span { font-size: 1rem;}
 /* HERO SECTION */
     .hero {
         min-height: 25vh;
-        align-items: flex-start;
+        /* align-items: flex-start; */
     }
 
     .hero button {
         width: fit-content;
-        padding: 10px 35px;
+        padding: 10px 35px !important;
     }
 
 }
