@@ -24,4 +24,4 @@ COPY . .
 ENV FLASK_APP=app.py
 
 # Run the flask app
-CMD ["python", "-m", "app.app"]
+CMD ["python3", "-m", "app.app"]
