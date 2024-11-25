@@ -1,8 +1,8 @@
 import functools
 from flask import Blueprint, flash, redirect, render_template, session, url_for, g
-from forms import UserRegistrationForm, UserLoginForm
+from app.forms import UserRegistrationForm, UserLoginForm
 import re
-from models import User, db
+from app.models import User, db
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.exc import IntegrityError
 
