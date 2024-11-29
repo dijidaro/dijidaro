@@ -18,10 +18,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 
 # Copy the entire application into the container
-COPY ./app .
+COPY . .
 
 # Defines environment variables
 ENV FLASK_APP=app.py
 
 # Run the flask app
-CMD ["python", "app.py"]
+CMD ["python3", "-m", "app.app"]

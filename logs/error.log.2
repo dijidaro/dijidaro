@@ -1,0 +1,82 @@
+[2024-11-25 11:11:25,679] ERROR in app: Exception on /auth/user_login [GET]
+Traceback (most recent call last):
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/flask/app.py", line 878, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/flask/app.py", line 1253, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "/home/oti/web/projects/dijidaro/app/routes/auth.py", line 77, in load_logged_in_user
+    g.user = User.query.get(user_id)
+  File "<string>", line 2, in get
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/util/deprecations.py", line 386, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 1127, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/orm/query.py", line 1136, in _get_impl
+    return self.session._get_impl(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 3873, in _get_impl
+    return db_load_fn(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
+    return self._execute_internal(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+[SQL: SELECT users.id AS users_id, users.first_name AS users_first_name, users.last_name AS users_last_name, users.birth_date AS users_birth_date, users.username AS users_username, users.email AS users_email, users.gender AS users_gender, users.user_type AS users_user_type, users.password AS users_password, users.created AS users_created, users.status AS users_status 
+FROM users 
+WHERE users.id = %(pk_1)s]
+[parameters: {'pk_1': 4}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/flask/app.py", line 772, in handle_user_exception
+    return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+  File "/home/oti/web/projects/dijidaro/app/error_handlers.py", line 9, in handle_client_errors
+    if 400 <= int(status_code) <= 499:
+ValueError: invalid literal for int() with base 10: 'e3q8'
+[2024-11-25 11:11:25,711] ERROR in error_handlers: Server Error 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.

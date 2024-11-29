@@ -1,14 +1,11 @@
 import os
-from config import create_app
-from models import db
+from app.config import create_app
+from app.models import db
 from flask_migrate import Migrate
 
 app = create_app()
 
-# Initialize database
 db.init_app(app)
-
-# Set up Flask-Migrate for databas migrations
 migrate = Migrate(app, db)
 
 with app.app_context():

@@ -6,7 +6,7 @@ def init_error_handlers(app):
     @app.errorhandler(Exception)
     def handle_client_errors(error):
         status_code = getattr(error, 'code', 500)
-        if 400 <= status_code <= 499:
+        if 400 <= int(status_code, 10) <= 499:
             app.logger.warning(f"Client Error {status_code}: {str(error)}")
             return render_template(
                 'errors/client_error.html',

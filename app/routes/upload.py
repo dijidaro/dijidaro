@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from routes.auth import login_required
+from app.routes.auth import login_required
 
 upload_bp = Blueprint("upload", __name__)
 
