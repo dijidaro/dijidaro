@@ -5,5 +5,106 @@
 {% endblock %}
 
 {% block body %}
-    <p>Loading...</p>
+    <div class="upload-page row">
+        <section class="upload-instructions p-3 col-md-6">
+            <h2>Guidelines &amp; Tips <i class="bi bi-caret-down-fill d-md-none"></i></h2>
+            <ol>
+                <li>File size limit</li>
+                <p>To ensure smooth and efficient uploads, please  make sure that your PDF 
+                    file does not exceed a maximum size of 3MB.</p>
+                <li>Scanning PDFs</li>
+                <p>
+                    Don't have a digital version of your study materials? No problem! 
+                    Follow these steps to scan your documents using your smartphone:
+                </p>
+                <ul>
+                    <li>Install a reputable scanning app like Adobe Scanner, 
+                        CamScanner, or Microsoft Office Lens on your smartphone.</li>
+                    <li>
+                        Open the scanning app and choose the document scanning option.
+                        <em>Place your document on a well-lit, contrasting background.</em>
+                    </li>
+                    <li>Capture the document by aligning it within the scanning frame.</li>
+                    <li> Review and adjust the scan if necessary.</li>
+                    <li>Save the scan as a PDF file.</li>
+                    <li>You're now ready to upload your freshly scanned document!</li>
+                </ul>
+            </ol>
+        </section>
+        <section class="upload-form p-3 col-md-6">
+            <h2>Upload Resource</h2>
+            <form method="post" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                <div class="mb-3">
+                    {{ form.resource.label(class="form-label")}} <span class="text-danger">*</span>
+                    {{ form.resource }}
+                    {% if form.resource.errors %}
+                        <ul class="error">
+                            {% for error in form.resource.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.subject.label(class="form-label")}} <span class="text-danger">*</span>
+                    {{ form.subject }}
+                    {% if form.subject.errors %}
+                        <ul class="error">
+                            {% for error in form.subject.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.school.label(class="form-label")}} <span class="text-danger">*</span>
+                    {{ form.school }}
+                    {% if form.school.errors %}
+                        <ul class="error">
+                            {% for error in form.school.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.term.label(class="form-label")}} <span class="text-danger">*</span>
+                    {{ form.term }}
+                    {% if form.term.errors %}
+                        <ul class="error">
+                            {% for error in form.term.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.year.label(class="form-label")}} <span class="text-danger">*</span>
+                    {{ form.year }}
+                    {% if form.year.errors %}
+                        <ul class="error">
+                            {% for error in form.year.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.uploaded_resource.label(class="form-label")}} <span class="text-danger">*</span>
+                    {{ form.uploaded_resource }}
+                    {% if form.uploaded_resource.errors %}
+                        <ul class="error">
+                            {% for error in form.uploaded_resource.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.submit }}
+                </div>
+            </form>
+        </section>
+    </div>
 {% endblock %}

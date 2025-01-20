@@ -215,3 +215,47 @@ footer {
 .auth-form h2 { font-size: 1.5rem;}
 .auth-form p, .auth-form a { font-size: .9rem; line-height: 1.2;}
 
+/* UPLOADING PAGE */
+/* .upload-page {
+    display: flex;
+    flex-direction: column;
+} */
+
+.upload-page h2 {
+    font-size: 1.3rem;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    color: var(--dark);
+}
+.upload-page ol > li {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.upload-page .button {
+    background-color: var(--tertiary-color2);
+    color: var(--light);
+    font-size: 1.3rem;
+}
+.upload-page .button:hover {
+    background-color: var(--tertiary-color);
+    color: var(--light);
+}
+
+.upload-instructions {
+    background-color: var(--light);
+}
+
+.upload-form {
+    border: 1px solid var(--light-shade);
+    border-radius: 5px;
+    border-top-color: white;
+}
+
+.upload-form form .form-control {
+    border: 1px solid var(--dark-light);
+}
+.upload-form form label {
+    color: var(--primary-color);
+    font-weight: 600;
+}

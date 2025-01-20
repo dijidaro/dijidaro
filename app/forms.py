@@ -1,8 +1,8 @@
-from datetime import datetime
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileAllowed, FileSize, FileRequired
-from wtforms import StringField, IntegerField, FileField, SelectField, EmailField, DateField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, EqualTo, NumberRange
+from flask_wtf.file import FileRequired, FileAllowed, FileSize
+from wtforms import *
+from wtforms.validators import *
+import datetime
 
 class UserRegistrationForm(FlaskForm):
     first_name = StringField("First Name", 
@@ -64,7 +64,7 @@ class UploadResourceForm(FlaskForm):
                                     ("ET1", "End Term 1"),("ET2", "End Term 2"),("ET3", "End Term 3"),
                                       ("cat", "Continous Assessment Test (CAT)"), ("holiday", "HOLIDAY ASSIGNMENT")], 
                             validators=[InputRequired(message="Field required")],
-                            render_kw={"class":"form-select"})
+                            render_kw={"class":"form-control form-select"})
     subject = StringField("Subject", validators=[InputRequired(message="Field required")],
                             render_kw={"class":"form-control form-select", "placeholder":"Enter subject"})
     
@@ -79,12 +79,12 @@ class UploadResourceForm(FlaskForm):
     term = SelectField("Term", 
                        choices=[("", "-- Select school term"), ("1", "One"), ("2", "Two"), ("3", "Three"), ("KCSE", "KCSE"),("mock", "MOCK")],
                        validators=[InputRequired(message="Field required")], 
-                       render_kw={"class":"form-select"})
+                       render_kw={"class":"form-control form-select"})
     
     year = IntegerField("Year (e.g 1991)", 
                         validators = [
                             InputRequired(message="Field required"),
-                            NumberRange(min=1985, max=datetime.datetime.now() .year, message="Invalid year.")             
+                            NumberRange(min=1985, max=datetime.datetime.now().year, message="Invalid year.")             
                             ],
                             render_kw={"class":"form-control", "placeholder":"Enter year"})
     

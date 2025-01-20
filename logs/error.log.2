@@ -1,15 +1,10 @@
-[2025-01-20 11:48:01,825] ERROR in app: Exception on /explore [GET]
+[2024-11-25 11:40:37,661] ERROR in app: Exception on /auth/registration [GET]
 Traceback (most recent call last):
   File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
     self.dialect.do_execute(
   File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
     cursor.execute(statement, parameters)
-psycopg2.OperationalError: server closed the connection unexpectedly
-	This probably means the server terminated abnormally
-	before or while processing the request.
-server closed the connection unexpectedly
-	This probably means the server terminated abnormally
-	before or while processing the request.
+psycopg2.OperationalError: SSL SYSCALL error: EOF detected
 
 
 The above exception was the direct cause of the following exception:
@@ -54,17 +49,12 @@ Traceback (most recent call last):
     self.dialect.do_execute(
   File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
     cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) server closed the connection unexpectedly
-	This probably means the server terminated abnormally
-	before or while processing the request.
-server closed the connection unexpectedly
-	This probably means the server terminated abnormally
-	before or while processing the request.
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL SYSCALL error: EOF detected
 
 [SQL: SELECT users.id AS users_id, users.first_name AS users_first_name, users.last_name AS users_last_name, users.birth_date AS users_birth_date, users.username AS users_username, users.email AS users_email, users.gender AS users_gender, users.user_type AS users_user_type, users.password AS users_password, users.created AS users_created, users.status AS users_status 
 FROM users 
 WHERE users.id = %(pk_1)s]
-[parameters: {'pk_1': 1}]
+[parameters: {'pk_1': 4}]
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
 
 During handling of the above exception, another exception occurred:
@@ -77,6 +67,6 @@ Traceback (most recent call last):
   File "/home/oti/web/projects/dijidaro/venv/lib/python3.8/site-packages/flask/app.py", line 772, in handle_user_exception
     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
   File "/home/oti/web/projects/dijidaro/app/error_handlers.py", line 9, in handle_client_errors
-    if 400 <= status_code <= 499:
-TypeError: '<=' not supported between instances of 'int' and 'str'
-[2025-01-20 11:48:01,962] ERROR in error_handlers: Server Error 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+    if 400 <= int(status_code) <= 499:
+ValueError: invalid literal for int() with base 10: 'e3q8'
+[2024-11-25 11:40:37,663] ERROR in error_handlers: Server Error 500: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
