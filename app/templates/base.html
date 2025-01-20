@@ -82,9 +82,9 @@
             {% block body %} {% endblock %}
         </div>
     </main>
-    <footer>
-        <div id="footer" class="container">
-            <div>
+    <footer class="mt-5">
+        <div id="footer" class="container row text-center mx-auto p-4">
+            <div class="col-md-4">
                 <h5>About</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a class="nav-link p-0" href="">About DijiDaro</a></li>
@@ -95,14 +95,14 @@
                     <li class="nav-item mb-2"><a class="nav-link p-0" href="">Donate</a></li>
                 </ul>
             </div>
-            <div>
+            <div class="col-md-4">
                 <h5>Community</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a class="nav-link p-0" href="">Community Guidelines</a></li>
                     <li class="nav-item mb-2"><a class="nav-link p-0" href="">Discussion Forums</a></li>
                 </ul>
             </div>
-            <div>
+            <div class="col-md-4">
                 <h5>Resources</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a class="nav-link p-0" href="">Download</a></li>
@@ -110,14 +110,9 @@
                 </ul>
             </div>
         </div>
-        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-            <p>&copy; 2024 Vostlink, Inc. All rights reserved.</p>
-            <ul class="list-unstyled d-flex">
-              <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-              <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-              <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-            </ul>
-          </div>
+        <div class="copy text-center border-top">
+            <p class="p-3">&copy; 2024 Vostlink, Inc. All rights reserved.</p>
+        </div>
     </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

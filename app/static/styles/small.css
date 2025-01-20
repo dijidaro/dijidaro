@@ -259,3 +259,30 @@ footer {
     color: var(--primary-color);
     font-weight: 600;
 }
+
+
+/* FOOTER SECTION */
+footer {
+    background-color: var(--tertiary-color);
+}
+footer .nav-link {
+    color: var(--light) !important;
+    text-decoration: underline;
+    line-height: 2;
+
+}
+footer .nav-link:hover {
+    text-decoration: underline;
+    color: var(--secondary-color) !important;
+}
+
+#footer div {
+    margin-top: 15px;
+}
+#footer h5 {
+    color: var(--secondary-color);
+}
+
+.copy p{
+    color: var(--text-color-light);
+}
