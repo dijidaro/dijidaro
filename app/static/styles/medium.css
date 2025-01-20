@@ -75,9 +75,10 @@ nav .bi, .uname, nav a span { font-size: 1rem;}
         padding: 10px 35px !important;
     }
 
-}
 
-/* UPLOAD PAGE */
-.upload-page {
-    margin-top: 20px;
+    /* UPLOAD PAGE */
+    .upload-page {
+        margin-top: 50px !important;
+    }
+
 }

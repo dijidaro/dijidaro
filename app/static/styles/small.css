@@ -223,7 +223,7 @@ footer {
 
 .upload-page h2 {
     font-size: 1.3rem;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-bottom: 15px;
     color: var(--dark);
 }
@@ -249,7 +249,6 @@ footer {
 .upload-form {
     border: 1px solid var(--light-shade);
     border-radius: 5px;
-    border-top-color: white;
 }
 
 .upload-form form .form-control {
@@ -285,4 +284,6 @@ footer .nav-link:hover {
 
 .copy p{
     color: var(--text-color-light);
+    font-size: .85rem;
 }
+.copy a { color: var(--secondary-color) !important;}
